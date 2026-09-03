@@ -1,0 +1,5 @@
+﻿Id,Cenario,Area,RiscoPrincipal,Descricao,ControlesRecomendados
+CEN-01,Entrada principal,Recepção,Acesso não autorizado,Visitantes e prestadores entram na área administrativa durante todo o dia,Barreira de perímetro|CFTV|Controle de acesso por cartão
+CEN-02,Sala de servidores,Sala de Servidores,Acesso indevido e falha ambiental,Equipamentos críticos processam dados institucionais e exigem proteção reforçada,Biometria|CFTV|Detector de fumaça e combate a incêndio|Climatização e energia redundante
+CEN-03,Arquivo removível,Armário de mídias,Exposição e perda de informação,Mídias com cópias de segurança aguardam transporte autorizado,Controle de acesso por cartão|Armário protegido para mídias|CFTV
+CEN-04,Ambiente compartilhado,Laboratório de apoio,Furto e sabotagem,Equipamentos de rede ficam próximos de uma área com circulação frequente,Barreira de perímetro|CFTV|Controle de acesso por cartão

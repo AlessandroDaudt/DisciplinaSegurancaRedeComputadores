@@ -1,0 +1,6 @@
+﻿DataHora,Nome,Perfil,Area,Sensibilidade,Autorizado,HorarioPermitido,Observacao
+2026-08-25 08:15,Ana Costa,Administradora de Redes,Sala de Servidores,Alta,Sim,Sim,Manutenção programada
+2026-08-25 08:40,Bruno Lima,Estagiário,Sala de Servidores,Alta,Sim,Sim,Acompanhamento não registrado
+2026-08-25 19:30,Carlos Mendes,Técnico de Infraestrutura,Sala de Servidores,Alta,Sim,Não,Entrada fora da janela de manutenção
+2026-08-25 10:05,Daniela Rocha,Visitante,Arquivo físico,Alta,Não,Não,Tentativa sem credencial
+2026-08-25 14:20,Elisa Martins,Segurança Patrimonial,Recepção,Média,Sim,Sim,Rotina de atendimento

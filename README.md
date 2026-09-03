@@ -1,4 +1,4 @@
-# Segurança de Redes de Computadores
+﻿# Segurança de Redes de Computadores
 
 Repositório de apoio para a disciplina de Segurança de Redes de Computadores. O conteúdo reúne materiais de aula, espaços para avaliações e atividades práticas em Windows PowerShell.
 
@@ -38,8 +38,8 @@ git pull
 
 1. Escolha a aula que deseja estudar e leia o README da pasta.
 2. Consulte o PDF do tópico, quando ele estiver disponível.
-3. Para realizar as atividades práticas, abra [Aula 02](Aula%2002/README.md).
-4. Abra a interface específica da atividade escolhida; cada exercício possui sua própria tela em Aula 02.
+3. Para realizar atividades práticas, abra [Aula 02](Aula%2002/README.md) ou [Aula 03](Aula%2003/README.md).
+4. Abra a interface específica da atividade escolhida; cada exercício possui sua própria tela.
 
 Para iniciar a interface pelo Windows PowerShell 5.1:
 
@@ -57,14 +57,14 @@ Não existe mais uma tela geral: cada atividade possui uma interface própria, c
 | --- | --- |
 | [Aula 01](Aula%2001/) | Material em PDF do Tópico 1 — Fundamentos e tríade CIA |
 | [Aula 02](Aula%2002/) | Atividades práticas em PowerShell, organizadas por tópico |
-| [Aula 03](Aula%2003/) | Material em PDF do Tópico 3 — Criptografia |
+| [Aula 03](Aula%2003/) | Segurança Física: material em PDF e atividades práticas em PowerShell |
 | [Aula 04 - Avaliação 1](Aula%2004%20-%20Avalia%C3%A7%C3%A3o%201/) | Espaço reservado para a primeira avaliação |
 | [Aula 05](Aula%2005/) | Material em PDF do Tópico 4 — Autenticidade e responsabilização |
 | [Aula 06 - Avaliação 2](Aula%2006%20-%20Avalia%C3%A7%C3%A3o%202/) | Material em PDF do Tópico 5 — Ameaças, ataques e mini-SOC |
 | [Aula 07 - Avaliação 3](Aula%2007%20-%20Avalia%C3%A7%C3%A3o%203/) | Espaço reservado para a terceira avaliação |
 | [Aula 08 - Recuperação](Aula%2008%20-%20Recupera%C3%A7%C3%A3o/) | Espaço reservado para a recuperação |
 
-As atividades de PowerShell ficam concentradas em [Aula 02](Aula%2002/), conforme a organização definida para este material de apoio. O PDF do Tópico 2 não estava presente na pasta recebida, mas as atividades de integridade e hash estão disponíveis.
+As atividades de PowerShell estão organizadas em [Aula 02](Aula%2002/) e [Aula 03](Aula%2003/). O PDF do Tópico 2 não estava presente na pasta recebida, mas as atividades de integridade e hash estão disponíveis.
 
 ## Atividades práticas
 
@@ -75,8 +75,9 @@ As atividades de PowerShell ficam concentradas em [Aula 02](Aula%2002/), conform
 | 04 e 05 | Criptografia simétrica e assimétrica | [abrir interfaces](Aula%2002/topico-03-criptografia/README.md) |
 | 06 e 07 | Assinaturas, logs e análise forense | [abrir interfaces](Aula%2002/topico-04-autenticidade-e-responsabilizacao/README.md) |
 | 08 e 09 | Classificação de cenários e mini-SOC | [abrir interfaces](Aula%2002/topico-05-ameacas-ataques-e-mini-soc/README.md) |
+| 10 a 14 | Segurança Física: acesso, controles, CPD, mídias e rotinas | [abrir interfaces](Aula%2003/topico-06-seguranca-fisica/README.md) |
 
-Cada tópico possui seu próprio roteiro e uma pasta `dados` com arquivos sintéticos. Os resultados gerados durante a execução ficam em pastas `resultado`, que não devem ser versionadas.
+Cada tópico possui seu próprio roteiro e uma pasta dados com arquivos sintéticos. Os resultados gerados durante a execução ficam em pastas resultado, que não devem ser versionadas.
 
 ## Requisitos
 

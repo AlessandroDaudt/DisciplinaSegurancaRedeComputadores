@@ -1,0 +1,5 @@
+﻿Id,Tipo,Conteudo,Sensibilidade,LocalArmazenamento,AutorizacaoTransporte,EmbalagemProtegida,ExposicaoCalor,ExposicaoCampoMagnetico,Destino,Observacao
+MID-001,HD externo,Backup do CPD,Alta,Armário trancado,Sim,Sim,Não,Não,Cofre de backup,Proteção adequada
+MID-002,Pendrive,Lista de alunos,Média,Gaveta comum,Não,Não,Não,Não,Área pública,Sem controle de saída
+MID-003,Fita magnética,Cópia de segurança,Alta,Próxima ao equipamento,Sim,Sim,Sim,Sim,Transporte externo,Exposta a condições inadequadas
+MID-004,DVD óptico,Material de instalação,Baixa,Armário trancado,Sim,Sim,Não,Não,Laboratório autorizado,Proteção adequada
