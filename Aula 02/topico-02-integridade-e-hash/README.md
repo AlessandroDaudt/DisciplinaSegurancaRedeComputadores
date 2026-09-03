@@ -8,6 +8,8 @@ Usar funções de hash para detectar alterações em arquivos e compreender como
 
 Script: [atividade-02-hash-integridade.ps1](atividade-02-hash-integridade.ps1)
 
+Interface para alunos: [interface-atividade-02-hash-integridade.ps1](interface-atividade-02-hash-integridade.ps1)
+
 Na primeira execução, o script calcula e guarda uma referência SHA-256. Nas execuções seguintes, compara o conteúdo atual com essa referência.
 
 ### Roteiro
@@ -20,6 +22,8 @@ Na primeira execução, o script calcula e guarda uma referência SHA-256. Nas e
 ## Atividade 03 — Monitoramento de alterações
 
 Script: [atividade-03-monitoramento-alteracoes.ps1](atividade-03-monitoramento-alteracoes.ps1)
+
+Interface para alunos: [interface-atividade-03-monitoramento-alteracoes.ps1](interface-atividade-03-monitoramento-alteracoes.ps1)
 
 O script calcula uma linha de base para os arquivos da pasta `dados` e identifica arquivos novos, modificados ou removidos.
 

@@ -1,9 +1,13 @@
 [CmdletBinding()]
 param(
-    [string]$Arquivo = (Join-Path (Join-Path $PSScriptRoot 'dados') 'mensagem-confidencial.txt')
+    [string]$Arquivo
 )
 
 Write-Host 'ATIVIDADE 05 - CRIPTOGRAFIA ASSIMETRICA COM CERTIFICADO' -ForegroundColor Cyan
+
+if ([string]::IsNullOrWhiteSpace($Arquivo)) {
+    $Arquivo = Join-Path (Join-Path $PSScriptRoot 'dados') 'mensagem-confidencial.txt'
+}
 
 if (-not (Test-Path -LiteralPath $Arquivo)) {
     Write-Error "Mensagem de teste nao encontrada: $Arquivo"

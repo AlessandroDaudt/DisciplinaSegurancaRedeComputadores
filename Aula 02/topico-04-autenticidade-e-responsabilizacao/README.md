@@ -8,6 +8,8 @@ Verificar a origem confiável de arquivos e usar registros para reconstruir uma 
 
 Script: [atividade-06-autenticidade-assinatura.ps1](atividade-06-autenticidade-assinatura.ps1)
 
+Interface para alunos: [interface-atividade-06-autenticidade-assinatura.ps1](interface-atividade-06-autenticidade-assinatura.ps1)
+
 O script consulta a assinatura Authenticode de [dados/script-teste.ps1](dados/script-teste.ps1) e do executável do Windows PowerShell. Os resultados podem indicar, por exemplo, `Valid` ou `NotSigned`.
 
 O laboratório apenas consulta assinaturas: nenhum arquivo é executado ou alterado.
@@ -15,6 +17,8 @@ O laboratório apenas consulta assinaturas: nenhum arquivo é executado ou alter
 ## Atividade 07 — Logs e análise forense
 
 Script: [atividade-07-logs-e-forense.ps1](atividade-07-logs-e-forense.ps1)
+
+Interface para alunos: [interface-atividade-07-logs-forense.ps1](interface-atividade-07-logs-forense.ps1)
 
 O exercício trabalha com eventos sintéticos, ordena os registros, agrupa falhas de autenticação por origem e destaca padrões que merecem investigação.
 

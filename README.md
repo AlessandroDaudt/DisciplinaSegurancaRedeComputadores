@@ -9,15 +9,17 @@ Repositório de apoio para a disciplina de Segurança de Redes de Computadores. 
 1. Escolha a aula que deseja estudar e leia o README da pasta.
 2. Consulte o PDF do tópico, quando ele estiver disponível.
 3. Para realizar as atividades práticas, abra [Aula 02](Aula%2002/README.md).
-4. Execute a [interface principal](Aula%2002/interface-principal.ps1) ou abra diretamente o script indicado no roteiro.
+4. Abra a interface específica da atividade escolhida; cada exercício possui sua própria tela em Aula 02.
 
 Para iniciar a interface pelo Windows PowerShell 5.1:
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\Aula 02\interface-principal.ps1"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\Aula 02\topico-02-integridade-e-hash\interface-atividade-02-hash-integridade.ps1"
 ```
 
 O parâmetro `-ExecutionPolicy Bypass` vale apenas para o processo iniciado e não altera a política permanente do computador.
+
+Não existe mais uma tela geral: cada atividade possui uma interface própria, com instruções curtas, seleção de arquivos e um botão de execução.
 
 ## Organização do repositório
 
@@ -38,11 +40,11 @@ As atividades de PowerShell ficam concentradas em [Aula 02](Aula%2002/), conform
 
 | Atividade | Tema | Arquivo |
 | --- | --- | --- |
-| 01 | Auditoria da tríade CIA | [atividade-01](Aula%2002/topico-01-fundamentos-e-cia/atividade-01-auditoria-cia.ps1) |
-| 02 e 03 | Integridade, hash e linha de base | [tópico 02](Aula%2002/topico-02-integridade-e-hash/README.md) |
-| 04 e 05 | Criptografia simétrica e assimétrica | [tópico 03](Aula%2002/topico-03-criptografia/README.md) |
-| 06 e 07 | Assinaturas, logs e análise forense | [tópico 04](Aula%2002/topico-04-autenticidade-e-responsabilizacao/README.md) |
-| 08 e 09 | Classificação de cenários e mini-SOC | [tópico 05](Aula%2002/topico-05-ameacas-ataques-e-mini-soc/README.md) |
+| 01 | Auditoria da tríade CIA | [abrir interface](Aula%2002/topico-01-fundamentos-e-cia/interface-atividade-01-auditoria-cia.ps1) |
+| 02 e 03 | Integridade, hash e linha de base | [abrir interfaces](Aula%2002/topico-02-integridade-e-hash/README.md) |
+| 04 e 05 | Criptografia simétrica e assimétrica | [abrir interfaces](Aula%2002/topico-03-criptografia/README.md) |
+| 06 e 07 | Assinaturas, logs e análise forense | [abrir interfaces](Aula%2002/topico-04-autenticidade-e-responsabilizacao/README.md) |
+| 08 e 09 | Classificação de cenários e mini-SOC | [abrir interfaces](Aula%2002/topico-05-ameacas-ataques-e-mini-soc/README.md) |
 
 Cada tópico possui seu próprio roteiro e uma pasta `dados` com arquivos sintéticos. Os resultados gerados durante a execução ficam em pastas `resultado`, que não devem ser versionadas.
 

@@ -1,12 +1,16 @@
 [CmdletBinding()]
 param(
-    [switch]$MostrarGabarito
+    [switch]$MostrarGabarito,
+    [string]$ArquivoCenarios
 )
 
 Write-Host 'ATIVIDADE 08 - AMEACA, ATAQUE OU VULNERABILIDADE?' -ForegroundColor Cyan
 Write-Host ''
 
-$arquivoCenarios = Join-Path (Join-Path $PSScriptRoot 'dados') 'cenarios-seguranca.csv'
+if ([string]::IsNullOrWhiteSpace($ArquivoCenarios)) {
+    $ArquivoCenarios = Join-Path (Join-Path $PSScriptRoot 'dados') 'cenarios-seguranca.csv'
+}
+
 if (-not (Test-Path -LiteralPath $arquivoCenarios)) {
     Write-Error "Arquivo de cenarios nao encontrado: $arquivoCenarios"
     return

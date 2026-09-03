@@ -8,6 +8,8 @@ Relacionar confidencialidade, integridade e disponibilidade a evidências que po
 
 Script: [atividade-01-auditoria-cia.ps1](atividade-01-auditoria-cia.ps1)
 
+Interface para alunos: [interface-atividade-01-auditoria-cia.ps1](interface-atividade-01-auditoria-cia.ps1)
+
 O exercício verifica:
 
 - **Confidencialidade:** permissões NTFS do arquivo de teste;

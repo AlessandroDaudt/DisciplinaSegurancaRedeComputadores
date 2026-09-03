@@ -2,12 +2,16 @@
 param(
     [ValidateSet('Demonstrar', 'Criptografar', 'Descriptografar')]
     [string]$Modo = 'Demonstrar',
-    [string]$Senha = 'Senha-Laboratorio-2026!'
+    [string]$Senha = 'Senha-Laboratorio-2026!',
+    [string]$ArquivoEntrada
 )
 
 Write-Host 'ATIVIDADE 04 - CRIPTOGRAFIA SIMETRICA COM AES' -ForegroundColor Cyan
 
-$arquivoEntrada = Join-Path (Join-Path $PSScriptRoot 'dados') 'mensagem-confidencial.txt'
+if ([string]::IsNullOrWhiteSpace($ArquivoEntrada)) {
+    $ArquivoEntrada = Join-Path (Join-Path $PSScriptRoot 'dados') 'mensagem-confidencial.txt'
+}
+
 $pastaResultado = Join-Path $PSScriptRoot 'resultado'
 $arquivoCifrado = Join-Path $pastaResultado 'mensagem-confidencial.aes.txt'
 

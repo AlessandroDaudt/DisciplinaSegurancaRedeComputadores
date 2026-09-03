@@ -1,6 +1,8 @@
 [CmdletBinding()]
 param(
-    [switch]$ColetarHost
+    [switch]$ColetarHost,
+    [string]$ArquivoEventos,
+    [string]$ArquivoEvidencia
 )
 
 Write-Host 'ATIVIDADE 09 - MINI-SOC EM POWERSHELL' -ForegroundColor Cyan
@@ -8,8 +10,12 @@ Write-Host 'A triagem usa dados sinteticos e coleta local opcional somente de le
 Write-Host ''
 
 $pastaDados = Join-Path $PSScriptRoot 'dados'
-$arquivoEventos = Join-Path $pastaDados 'eventos-triagem.csv'
-$arquivoEvidencia = Join-Path $pastaDados 'evidencia-arquivo.txt'
+if ([string]::IsNullOrWhiteSpace($ArquivoEventos)) {
+    $ArquivoEventos = Join-Path $pastaDados 'eventos-triagem.csv'
+}
+if ([string]::IsNullOrWhiteSpace($ArquivoEvidencia)) {
+    $ArquivoEvidencia = Join-Path $pastaDados 'evidencia-arquivo.txt'
+}
 $pastaResultado = Join-Path $PSScriptRoot 'resultado'
 $arquivoRelatorio = Join-Path $pastaResultado 'relatorio-mini-soc.txt'
 
