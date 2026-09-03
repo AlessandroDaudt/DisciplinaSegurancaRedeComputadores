@@ -5,3 +5,6 @@
 *.cipher
 *.log
 *.tmp
+
+# Cópia local duplicada do PDF de Tópico 1, mantida fora do conteúdo versionado
+/Aula 02/TISRC-TÓPICO1-CONTEÚDO.pdf

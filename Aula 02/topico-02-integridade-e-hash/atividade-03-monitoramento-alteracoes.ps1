@@ -1,8 +1,12 @@
 [CmdletBinding()]
 param(
-    [string]$PastaDados = (Join-Path $PSScriptRoot 'dados'),
+    [string]$PastaDados,
     [switch]$RecriarReferencia
 )
+
+if ([string]::IsNullOrWhiteSpace($PastaDados)) {
+    $PastaDados = Join-Path $PSScriptRoot 'dados'
+}
 
 Write-Host 'ATIVIDADE 03 - MONITORAMENTO DE ALTERACOES' -ForegroundColor Cyan
 

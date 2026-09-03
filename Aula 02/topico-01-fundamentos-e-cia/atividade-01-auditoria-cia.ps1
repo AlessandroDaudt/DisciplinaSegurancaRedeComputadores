@@ -1,7 +1,11 @@
 [CmdletBinding()]
 param(
-    [string]$PastaDados = (Join-Path $PSScriptRoot 'dados')
+    [string]$PastaDados
 )
+
+if ([string]::IsNullOrWhiteSpace($PastaDados)) {
+    $PastaDados = Join-Path $PSScriptRoot 'dados'
+}
 
 Write-Host 'ATIVIDADE 01 - AUDITORIA DA TRIADE CIA' -ForegroundColor Cyan
 Write-Host 'O script realiza somente verificacoes locais de leitura.' -ForegroundColor DarkGray

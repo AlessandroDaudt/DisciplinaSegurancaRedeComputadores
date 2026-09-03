@@ -18,8 +18,8 @@ $script:atividades = @(
         Topico = 'Topico 01 - Fundamentos e CIA'
         Objetivo = 'Observar confidencialidade, integridade e disponibilidade em arquivos locais de teste.'
         ComoUsar = 'Execute a verificacao e discuta qual controle poderia reduzir o risco observado em cada dimensao.'
-        ScriptRelativo = 'topico-01-fundamentos-e-cia\atividade-01-auditoria-cia.ps1'
-        ReadmeRelativo = 'topico-01-fundamentos-e-cia\README.md'
+        ScriptRelativo = 'Aula 02\topico-01-fundamentos-e-cia\atividade-01-auditoria-cia.ps1'
+        ReadmeRelativo = 'Aula 02\topico-01-fundamentos-e-cia\README.md'
         Interativa = $false
     }
     [PSCustomObject]@{
@@ -28,8 +28,8 @@ $script:atividades = @(
         Topico = 'Topico 02 - Integridade e hash'
         Objetivo = 'Calcular SHA-256 e verificar se um arquivo de teste foi alterado.'
         ComoUsar = 'Na primeira execucao uma referencia e criada. Altere uma palavra no arquivo e execute novamente.'
-        ScriptRelativo = 'topico-02-integridade-e-hash\atividade-02-hash-integridade.ps1'
-        ReadmeRelativo = 'topico-02-integridade-e-hash\README.md'
+        ScriptRelativo = 'Aula 02\topico-02-integridade-e-hash\atividade-02-hash-integridade.ps1'
+        ReadmeRelativo = 'Aula 02\topico-02-integridade-e-hash\README.md'
         Interativa = $false
     }
     [PSCustomObject]@{
@@ -38,8 +38,8 @@ $script:atividades = @(
         Topico = 'Topico 02 - Integridade e hash'
         Objetivo = 'Criar uma linha de base e identificar arquivos novos, modificados ou removidos.'
         ComoUsar = 'Execute uma vez para criar a referencia, altere a pasta dados e execute novamente.'
-        ScriptRelativo = 'topico-02-integridade-e-hash\atividade-03-monitoramento-alteracoes.ps1'
-        ReadmeRelativo = 'topico-02-integridade-e-hash\README.md'
+        ScriptRelativo = 'Aula 02\topico-02-integridade-e-hash\atividade-03-monitoramento-alteracoes.ps1'
+        ReadmeRelativo = 'Aula 02\topico-02-integridade-e-hash\README.md'
         Interativa = $false
     }
     [PSCustomObject]@{
@@ -48,8 +48,8 @@ $script:atividades = @(
         Topico = 'Topico 03 - Criptografia'
         Objetivo = 'Proteger e recuperar uma mensagem usando AES e a mesma senha de laboratorio.'
         ComoUsar = 'O modo Demonstrar cifra e decifra automaticamente o arquivo de teste.'
-        ScriptRelativo = 'topico-03-criptografia\atividade-04-criptografia-simetrica.ps1'
-        ReadmeRelativo = 'topico-03-criptografia\README.md'
+        ScriptRelativo = 'Aula 02\topico-03-criptografia\atividade-04-criptografia-simetrica.ps1'
+        ReadmeRelativo = 'Aula 02\topico-03-criptografia\README.md'
         Interativa = $false
     }
     [PSCustomObject]@{
@@ -58,8 +58,8 @@ $script:atividades = @(
         Topico = 'Topico 03 - Criptografia'
         Objetivo = 'Demonstrar o uso de chave publica e chave privada com um certificado de laboratorio.'
         ComoUsar = 'O script cria ou reutiliza um certificado no repositorio do usuario atual, sem exigir administrador.'
-        ScriptRelativo = 'topico-03-criptografia\atividade-05-criptografia-assimetrica.ps1'
-        ReadmeRelativo = 'topico-03-criptografia\README.md'
+        ScriptRelativo = 'Aula 02\topico-03-criptografia\atividade-05-criptografia-assimetrica.ps1'
+        ReadmeRelativo = 'Aula 02\topico-03-criptografia\README.md'
         Interativa = $false
     }
     [PSCustomObject]@{
@@ -68,8 +68,8 @@ $script:atividades = @(
         Topico = 'Topico 04 - Autenticidade e responsabilizacao'
         Objetivo = 'Consultar assinaturas Authenticode e observar o status de autenticidade de arquivos.'
         ComoUsar = 'O script apenas consulta o script de teste e o executavel do Windows PowerShell.'
-        ScriptRelativo = 'topico-04-autenticidade-e-responsabilizacao\atividade-06-autenticidade-assinatura.ps1'
-        ReadmeRelativo = 'topico-04-autenticidade-e-responsabilizacao\README.md'
+        ScriptRelativo = 'Aula 02\topico-04-autenticidade-e-responsabilizacao\atividade-06-autenticidade-assinatura.ps1'
+        ReadmeRelativo = 'Aula 02\topico-04-autenticidade-e-responsabilizacao\README.md'
         Interativa = $false
     }
     [PSCustomObject]@{
@@ -78,8 +78,8 @@ $script:atividades = @(
         Topico = 'Topico 04 - Autenticidade e responsabilizacao'
         Objetivo = 'Organizar eventos sinteticos, agrupar falhas de logon e destacar indicadores.'
         ComoUsar = 'Analise usuario, origem, horario, acao e resultado na linha do tempo gerada.'
-        ScriptRelativo = 'topico-04-autenticidade-e-responsabilizacao\atividade-07-logs-e-forense.ps1'
-        ReadmeRelativo = 'topico-04-autenticidade-e-responsabilizacao\README.md'
+        ScriptRelativo = 'Aula 02\topico-04-autenticidade-e-responsabilizacao\atividade-07-logs-e-forense.ps1'
+        ReadmeRelativo = 'Aula 02\topico-04-autenticidade-e-responsabilizacao\README.md'
         Interativa = $false
     }
     [PSCustomObject]@{
@@ -88,8 +88,8 @@ $script:atividades = @(
         Topico = 'Topico 05 - Ameacas, ataques e mini-SOC'
         Objetivo = 'Classificar cenarios de seguranca e receber feedback imediato.'
         ComoUsar = 'Esta atividade pede respostas no console do ISE. Use o botao para abrir o script e responda quando solicitado.'
-        ScriptRelativo = 'topico-05-ameacas-ataques-e-mini-soc\atividade-08-classificacao-seguranca.ps1'
-        ReadmeRelativo = 'topico-05-ameacas-ataques-e-mini-soc\README.md'
+        ScriptRelativo = 'Aula 02\topico-05-ameacas-ataques-e-mini-soc\atividade-08-classificacao-seguranca.ps1'
+        ReadmeRelativo = 'Aula 02\topico-05-ameacas-ataques-e-mini-soc\README.md'
         Interativa = $true
     }
     [PSCustomObject]@{
@@ -98,8 +98,8 @@ $script:atividades = @(
         Topico = 'Topico 05 - Ameacas, ataques e mini-SOC'
         Objetivo = 'Reunir indicadores, hash de evidencia e prioridade em um relatorio de triagem.'
         ComoUsar = 'A interface executa o modo didatico com dados sinteticos. A coleta opcional do host nao e acionada.'
-        ScriptRelativo = 'topico-05-ameacas-ataques-e-mini-soc\atividade-09-mini-soc.ps1'
-        ReadmeRelativo = 'topico-05-ameacas-ataques-e-mini-soc\README.md'
+        ScriptRelativo = 'Aula 02\topico-05-ameacas-ataques-e-mini-soc\atividade-09-mini-soc.ps1'
+        ReadmeRelativo = 'Aula 02\topico-05-ameacas-ataques-e-mini-soc\README.md'
         Interativa = $false
     }
 )

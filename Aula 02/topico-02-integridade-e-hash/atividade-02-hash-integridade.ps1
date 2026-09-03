@@ -1,8 +1,12 @@
 [CmdletBinding()]
 param(
-    [string]$Arquivo = (Join-Path (Join-Path $PSScriptRoot 'dados') 'arquivo-teste.txt'),
+    [string]$Arquivo,
     [switch]$RecriarReferencia
 )
+
+if ([string]::IsNullOrWhiteSpace($Arquivo)) {
+    $Arquivo = Join-Path (Join-Path $PSScriptRoot 'dados') 'arquivo-teste.txt'
+}
 
 Write-Host 'ATIVIDADE 02 - VERIFICACAO DE INTEGRIDADE COM HASH' -ForegroundColor Cyan
 

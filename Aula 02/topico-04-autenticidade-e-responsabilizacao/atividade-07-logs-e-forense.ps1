@@ -1,7 +1,11 @@
 [CmdletBinding()]
 param(
-    [string]$ArquivoEventos = (Join-Path (Join-Path $PSScriptRoot 'dados') 'eventos-seguranca.csv')
+    [string]$ArquivoEventos
 )
+
+if ([string]::IsNullOrWhiteSpace($ArquivoEventos)) {
+    $ArquivoEventos = Join-Path (Join-Path $PSScriptRoot 'dados') 'eventos-seguranca.csv'
+}
 
 Write-Host 'ATIVIDADE 07 - REGISTROS E ANALISE FORENSE' -ForegroundColor Cyan
 
