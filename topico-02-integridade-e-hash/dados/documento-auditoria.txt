@@ -1,0 +1,2 @@
+Documento de teste para a linha de base do laboratorio.
+Este arquivo representa um recurso que deve ser monitorado.

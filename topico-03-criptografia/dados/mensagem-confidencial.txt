@@ -1,0 +1,2 @@
+Mensagem de teste da disciplina de Seguranca de Redes de Computadores.
+Este texto representa uma informacao que deve permanecer confidencial.

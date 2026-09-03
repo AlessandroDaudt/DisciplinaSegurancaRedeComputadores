@@ -1,0 +1,2 @@
+Arquivo utilizado para demonstrar a verificacao de integridade.
+Altere uma unica palavra durante a atividade e compare o novo hash SHA-256.

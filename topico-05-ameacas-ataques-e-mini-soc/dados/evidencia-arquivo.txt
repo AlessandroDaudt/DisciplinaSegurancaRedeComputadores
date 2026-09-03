@@ -1,0 +1,2 @@
+Evidencia didatica para o relatorio do mini-SOC.
+O hash deste arquivo deve ser tratado como uma informacao de integridade.

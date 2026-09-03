@@ -1,0 +1,2 @@
+DISPONIVEL
+Este arquivo simula o status de um servico didatico.

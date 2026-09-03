@@ -1,0 +1,2 @@
+Arquivo de teste da disciplina.
+O conteudo representa um ativo que deve ser acessado somente por pessoas autorizadas.

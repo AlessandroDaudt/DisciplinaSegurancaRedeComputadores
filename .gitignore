@@ -1,0 +1,7 @@
+# Saidas geradas durante a execucao dos laboratorios
+**/resultado/
+*.aes.txt
+*.enc
+*.cipher
+*.log
+*.tmp

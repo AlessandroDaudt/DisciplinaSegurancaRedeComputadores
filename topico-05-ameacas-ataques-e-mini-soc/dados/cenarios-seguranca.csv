@@ -1,0 +1,7 @@
+ID,Cenario,Resposta,Justificativa
+1,"A possibilidade de um invasor explorar uma falha ainda nao explorada representa o que?",Ameaça,"Ameaça e a possibilidade ou capacidade de causar dano explorando uma vulnerabilidade."
+2,"Uma pessoa utiliza credenciais roubadas para acessar um sistema representa o que?",Ataque,"Ataque e a investida intencional contra os mecanismos de seguranca."
+3,"Uma conta administrativa sem autenticacao multifator representa o que?",Vulnerabilidade,"Vulnerabilidade e uma fraqueza que pode ser explorada."
+4,"Um codigo malicioso tenta explorar uma falha conhecida em um servidor representa o que?",Ataque,"Existe uma acao deliberada contra um sistema."
+5,"Um servidor mantem uma porta de gerenciamento exposta sem necessidade representa o que?",Vulnerabilidade,"A exposicao desnecessaria caracteriza uma fraqueza ou condicao exploravel."
+6,"A possibilidade de indisponibilidade causada por uma inundacao de requisicoes representa o que?",Ameaça,"O enunciado descreve uma possibilidade de dano, ainda sem indicar a acao executada."
