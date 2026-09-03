@@ -9,12 +9,12 @@ Repositório de apoio para a disciplina de Segurança de Redes de Computadores. 
 1. Escolha a aula que deseja estudar e leia o README da pasta.
 2. Consulte o PDF do tópico, quando ele estiver disponível.
 3. Para realizar as atividades práticas, abra [Aula 02](Aula%2002/README.md).
-4. Execute a [interface principal](interface-principal.ps1) ou abra diretamente o script indicado no roteiro.
+4. Execute a [interface principal](Aula%2002/interface-principal.ps1) ou abra diretamente o script indicado no roteiro.
 
 Para iniciar a interface pelo Windows PowerShell 5.1:
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\interface-principal.ps1"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\Aula 02\interface-principal.ps1"
 ```
 
 O parâmetro `-ExecutionPolicy Bypass` vale apenas para o processo iniciado e não altera a política permanente do computador.

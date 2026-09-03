@@ -6,10 +6,9 @@ Add-Type -AssemblyName System.Drawing
 
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
-$script:repositorio = Split-Path -Parent $MyInvocation.MyCommand.Path
-if ([string]::IsNullOrWhiteSpace($script:repositorio)) {
-    $script:repositorio = (Get-Location).Path
-}
+$script:pastaInterface = [System.IO.Path]::GetFullPath((Split-Path -Parent $MyInvocation.MyCommand.Path))
+$script:repositorio = Split-Path -Parent $script:pastaInterface
+$script:roteiroPrincipalPath = Join-Path $script:pastaInterface 'README.md'
 
 $script:atividades = @(
     [PSCustomObject]@{
@@ -403,35 +402,49 @@ function Executar-AtividadeAtual {
     }
 }
 
-$lista.Add_SelectedIndexChanged({ Atualizar-Atividade }.GetNewClosure())
+$lista.Add_SelectedIndexChanged({ Atualizar-Atividade })
 
-$btnExecutar.Add_Click({ Executar-AtividadeAtual }.GetNewClosure())
+$btnExecutar.Add_Click({ Executar-AtividadeAtual })
 
 $btnAbrirScript.Add_Click({
         if ($null -ne $script:atividadeAtual) {
             Abrir-NoISE -Caminho $script:atividadeAtual.ScriptPath
         }
-    }.GetNewClosure())
+    })
 
 $btnAbrirRoteiro.Add_Click({
+        $roteiros = @()
+
         if ($null -ne $script:atividadeAtual -and (Test-Path -LiteralPath $script:atividadeAtual.ReadmePath)) {
-            Start-Process -FilePath notepad.exe -ArgumentList @(('"{0}"' -f $script:atividadeAtual.ReadmePath))
-            Registrar-Saida 'Roteiro aberto no Bloco de Notas.'
+            $roteiros += $script:atividadeAtual.ReadmePath
+        }
+
+        if (Test-Path -LiteralPath $script:roteiroPrincipalPath) {
+            if ($roteiros.Count -eq 0 -or $roteiros[0] -ne $script:roteiroPrincipalPath) {
+                $roteiros += $script:roteiroPrincipalPath
+            }
+        }
+
+        if ($roteiros.Count -gt 0) {
+            foreach ($roteiro in $roteiros) {
+                Start-Process -FilePath notepad.exe -ArgumentList @(('"{0}"' -f $roteiro))
+                Registrar-Saida "Roteiro aberto: $roteiro"
+            }
         }
         else {
-            Registrar-Saida 'README do topico nao foi encontrado.'
+            Registrar-Saida 'Nenhum roteiro foi encontrado.'
         }
-    }.GetNewClosure())
+    })
 
 $btnAbrirPasta.Add_Click({
         Start-Process -FilePath explorer.exe -ArgumentList @(('"{0}"' -f $script:repositorio))
-    }.GetNewClosure())
+    })
 
-$btnLimpar.Add_Click({ $saida.Clear() }.GetNewClosure())
+$btnLimpar.Add_Click({ $saida.Clear() })
 
 $form.Add_Shown({
         $lista.SelectedIndex = 0
         $lista.Focus()
-    }.GetNewClosure())
+    })
 
 [void]$form.ShowDialog()

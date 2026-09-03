@@ -34,7 +34,7 @@ Exemplo:
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\Aula 02\topico-02-integridade-e-hash\atividade-02-hash-integridade.ps1"
 ```
 
-A [interface principal](../interface-principal.ps1) oferece acesso aos nove exercícios. A atividade 08 é interativa e deve ser respondida no ISE; as demais podem ser executadas pela interface.
+A [interface principal](interface-principal.ps1) oferece acesso aos nove exercícios. O botão **Abrir roteiro** abre o roteiro específico da atividade e também este roteiro geral da aula. A atividade 08 é interativa e deve ser respondida no ISE; as demais podem ser executadas pela interface.
 
 ## Saídas e segurança
 
