@@ -34,4 +34,6 @@ Interface para alunos: [interface-atividade-05-criptografia-assimetrica.ps1](int
 
 O script cria ou reutiliza um certificado autoassinado no repositório do usuário atual e usa `Protect-CmsMessage` e `Unprotect-CmsMessage`. A proteção usa a chave pública; a recuperação depende da chave privada.
 
+Na interface, use **Proteger arquivo** para criar o arquivo .cms e **Recuperar mensagem** para abrir um arquivo .cms já criado. A mensagem de teste fica em [dados/mensagem-confidencial.txt](dados/mensagem-confidencial.txt).
+
 O certificado é exclusivo do laboratório e não representa uma cadeia de confiança real. A atividade é local e não envia dados para a internet.
