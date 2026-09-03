@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [switch]$ColetarHost,
     [string]$ArquivoEventos,
@@ -6,7 +6,7 @@ param(
 )
 
 Write-Host 'ATIVIDADE 09 - MINI-SOC EM POWERSHELL' -ForegroundColor Cyan
-Write-Host 'A triagem usa dados sinteticos e coleta local opcional somente de leitura.' -ForegroundColor DarkGray
+Write-Host 'A triagem usa dados sintéticos e coleta local opcional somente de leitura.' -ForegroundColor DarkGray
 Write-Host ''
 
 $pastaDados = Join-Path $PSScriptRoot 'dados'
@@ -24,7 +24,7 @@ if (-not (Test-Path -LiteralPath $pastaResultado)) {
 }
 
 if (-not (Test-Path -LiteralPath $arquivoEventos) -or -not (Test-Path -LiteralPath $arquivoEvidencia)) {
-    Write-Error 'Um ou mais arquivos de teste nao foram encontrados.'
+    Write-Error 'Um ou mais arquivos de teste não foram encontrados.'
     return
 }
 
@@ -35,7 +35,7 @@ $score = 0
 foreach ($evento in $eventos) {
     switch ($evento.Severidade) {
         'Alta' { $score += 3 }
-        'Media' { $score += 2 }
+        'Média' { $score += 2 }
         'Baixa' { $score += 1 }
     }
 }
@@ -44,33 +44,33 @@ if ($score -ge 7) {
     $prioridade = 'Alta'
 }
 elseif ($score -ge 4) {
-    $prioridade = 'Media'
+    $prioridade = 'Média'
 }
 else {
     $prioridade = 'Baixa'
 }
 
 Write-Host 'Eventos de triagem:' -ForegroundColor Yellow
-$eventos | Format-Table -Wrap -AutoSize
-Write-Host "Hash SHA-256 da evidencia: $hashEvidencia"
-Write-Host "Pontuacao didatica: $score"
+$eventos | Select-Object DataHora, Tipo, Indicador, Severidade, Origem, @{ Name = 'Observação'; Expression = { $_.Observacao } } | Format-Table -Wrap -AutoSize
+Write-Host "Hash SHA-256 da evidência: $hashEvidencia"
+Write-Host "Pontuação didática: $score"
 Write-Host "Prioridade sugerida: $prioridade" -ForegroundColor Magenta
 
 $linhasRelatorio = @(
-    'RELATORIO DE TRIAGEM - MINI-SOC'
-    "Data da execucao: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+    'RELATÓRIO DE TRIAGEM - MINI-SOC'
+    "Data da execução: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
     ''
-    'EVIDENCIA LOCAL'
+    'EVIDÊNCIA LOCAL'
     "Arquivo: $arquivoEvidencia"
     "SHA-256: $hashEvidencia"
     ''
     'RESUMO'
     "Quantidade de indicadores: $($eventos.Count)"
-    "Pontuacao didatica: $score"
+    "Pontuação didática: $score"
     "Prioridade sugerida: $prioridade"
     ''
-    'OBSERVACAO'
-    'A classificacao e apenas uma triagem inicial e exige validacao humana e contexto adicional.'
+    'OBSERVAÇÃO'
+    'A classificação é apenas uma triagem inicial e exige validação humana e contexto adicional.'
 )
 
 if ($ColetarHost) {
@@ -86,18 +86,18 @@ if ($ColetarHost) {
         $linhasRelatorio += "Quantidade de portas em escuta: $($portas.Count)"
     }
     else {
-        $linhasRelatorio += 'Get-NetTCPConnection nao esta disponivel neste sistema.'
+        $linhasRelatorio += 'Get-NetTCPConnection não está disponível neste sistema.'
     }
 
     $servicosParados = @(Get-Service -ErrorAction SilentlyContinue |
         Where-Object { $_.Status -eq 'Stopped' } |
         Select-Object -First 10 Name, DisplayName, Status)
-    Write-Host 'Amostra de servicos parados:' -ForegroundColor Yellow
+    Write-Host 'Amostra de serviços parados:' -ForegroundColor Yellow
     $servicosParados | Format-Table -AutoSize
-    $linhasRelatorio += "Amostra de servicos parados coletada: $($servicosParados.Count)"
+    $linhasRelatorio += "Amostra de serviços parados coletada: $($servicosParados.Count)"
 }
 
 Set-Content -LiteralPath $arquivoRelatorio -Value $linhasRelatorio -Encoding UTF8
 Write-Host ''
-Write-Host "Relatorio salvo em: $arquivoRelatorio" -ForegroundColor Green
-Write-Host 'Pergunta para discussao: quais dados adicionais ajudariam a confirmar ou descartar cada indicador?' -ForegroundColor Yellow
+Write-Host "Relatório salvo em: $arquivoRelatorio" -ForegroundColor Green
+Write-Host 'Pergunta para discussão: quais dados adicionais ajudariam a confirmar ou descartar cada indicador?' -ForegroundColor Yellow

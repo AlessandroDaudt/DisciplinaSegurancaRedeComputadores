@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$PastaDados,
     [switch]$RecriarReferencia
@@ -8,10 +8,10 @@ if ([string]::IsNullOrWhiteSpace($PastaDados)) {
     $PastaDados = Join-Path $PSScriptRoot 'dados'
 }
 
-Write-Host 'ATIVIDADE 03 - MONITORAMENTO DE ALTERACOES' -ForegroundColor Cyan
+Write-Host 'ATIVIDADE 03 - MONITORAMENTO DE ALTERAÇÕES' -ForegroundColor Cyan
 
 if (-not (Test-Path -LiteralPath $PastaDados)) {
-    Write-Error "Pasta de dados nao encontrada: $PastaDados"
+    Write-Error "Pasta de dados não encontrada: $PastaDados"
     return
 }
 
@@ -69,14 +69,14 @@ foreach ($item in $atuais) {
         $alteracoes += [PSCustomObject]@{
             Tipo = 'Novo'
             Caminho = $item.Caminho
-            Observacao = 'Arquivo ausente na linha de base'
+            Observação = 'Arquivo ausente na linha de base'
         }
     }
     elseif ($referenciaPorCaminho[$item.Caminho].Hash -ne $item.Hash) {
         $alteracoes += [PSCustomObject]@{
             Tipo = 'Modificado'
             Caminho = $item.Caminho
-            Observacao = 'Hash diferente da linha de base'
+            Observação = 'Hash diferente da linha de base'
         }
     }
 }
@@ -86,19 +86,19 @@ foreach ($item in $referencia) {
         $alteracoes += [PSCustomObject]@{
             Tipo = 'Removido'
             Caminho = $item.Caminho
-            Observacao = 'Arquivo registrado, mas nao localizado'
+            Observação = 'Arquivo registrado, mas não localizado'
         }
     }
 }
 
 if ($alteracoes.Count -eq 0) {
-    Write-Host 'RESULTADO: nenhuma alteracao detectada.' -ForegroundColor Green
+    Write-Host 'RESULTADO: nenhuma alteração detectada.' -ForegroundColor Green
 }
 else {
     $alteracoes | Format-Table -AutoSize
     $alteracoes | Export-Csv -LiteralPath $arquivoRelatorio -NoTypeInformation -Encoding UTF8
-    Write-Host "Relatorio salvo em: $arquivoRelatorio" -ForegroundColor Yellow
+    Write-Host "Relatório salvo em: $arquivoRelatorio" -ForegroundColor Yellow
 }
 
 Write-Host ''
-Write-Host 'Pergunta para discussao: uma alteracao detectada prova que houve um ataque?' -ForegroundColor Yellow
+Write-Host 'Pergunta para discussão: uma alteração detectada prova que houve um ataque?' -ForegroundColor Yellow

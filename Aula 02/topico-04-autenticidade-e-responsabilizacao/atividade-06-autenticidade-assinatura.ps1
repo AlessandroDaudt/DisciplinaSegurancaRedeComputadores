@@ -1,14 +1,14 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string[]]$Arquivos
 )
 
 Write-Host 'ATIVIDADE 06 - AUTENTICIDADE E ASSINATURA DIGITAL' -ForegroundColor Cyan
-Write-Host 'Apenas assinaturas serao consultadas; nenhum arquivo sera executado.' -ForegroundColor DarkGray
+Write-Host 'Apenas assinaturas serão consultadas; nenhum arquivo será executado.' -ForegroundColor DarkGray
 Write-Host ''
 
 if (-not (Get-Command Get-AuthenticodeSignature -ErrorAction SilentlyContinue)) {
-    Write-Error 'Get-AuthenticodeSignature nao esta disponivel neste ambiente.'
+    Write-Error 'Get-AuthenticodeSignature não está disponível neste ambiente.'
     return
 }
 
@@ -24,8 +24,8 @@ foreach ($arquivo in $Arquivos) {
     if (-not (Test-Path -LiteralPath $arquivo)) {
         $resultados += [PSCustomObject]@{
             Arquivo = $arquivo
-            Status = 'Arquivo nao encontrado'
-            Signatario = '-'
+            Status = 'Arquivo não encontrado'
+            Signatário = '-'
             Mensagem = '-'
         }
         continue
@@ -40,11 +40,11 @@ foreach ($arquivo in $Arquivos) {
     $resultados += [PSCustomObject]@{
         Arquivo = $arquivo
         Status = $assinatura.Status
-        Signatario = $signatario
+        Signatário = $signatario
         Mensagem = $assinatura.StatusMessage
     }
 }
 
 $resultados | Format-Table -Wrap -AutoSize
 Write-Host ''
-Write-Host 'Pergunta para discussao: autenticidade e integridade sao exatamente a mesma coisa?' -ForegroundColor Yellow
+Write-Host 'Pergunta para discussão: autenticidade e integridade são exatamente a mesma coisa?' -ForegroundColor Yellow

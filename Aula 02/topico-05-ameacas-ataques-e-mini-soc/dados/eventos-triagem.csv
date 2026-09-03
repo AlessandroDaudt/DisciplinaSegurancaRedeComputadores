@@ -1,4 +1,4 @@
-DataHora,Tipo,Indicador,Severidade,Origem,Observacao
-2026-09-01 08:01:15,Autenticacao,Quatro falhas de logon para o mesmo usuario,Alta,10.10.10.20,Padrao repetitivo que merece investigacao
-2026-09-01 08:02:10,Autenticacao,Logon bem-sucedido apos falhas,Media,10.10.10.20,Correlacionar com a identidade do usuario
-2026-09-01 08:04:22,Integridade,Arquivo de evidencia com hash de referencia,Baixa,HOST-LAB,Comparar com uma linha de base confiavel
+﻿DataHora,Tipo,Indicador,Severidade,Origem,Observacao
+2026-09-01 08:01:15,Autenticação,Quatro falhas de logon para o mesmo usuário,Alta,10.10.10.20,Padrão repetitivo que merece investigação
+2026-09-01 08:02:10,Autenticação,Logon bem-sucedido após falhas,Média,10.10.10.20,Correlacionar com a identidade do usuário
+2026-09-01 08:04:22,Integridade,Arquivo de evidência com hash de referência,Baixa,HOST-LAB,Comparar com uma linha de base confiável

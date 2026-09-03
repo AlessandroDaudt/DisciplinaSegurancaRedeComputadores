@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param()
 
 . (Join-Path (Split-Path -Parent $PSScriptRoot) 'interface-comum.ps1')

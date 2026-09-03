@@ -1,8 +1,8 @@
-DataHora,IdEvento,Usuario,Origem,Acao,Resultado,Detalhes
-2026-09-01 08:01:15,4625,aluno,10.10.10.20,Logon,Falha,Senha invalida
-2026-09-01 08:01:28,4625,aluno,10.10.10.20,Logon,Falha,Senha invalida
-2026-09-01 08:01:41,4625,aluno,10.10.10.20,Logon,Falha,Senha invalida
-2026-09-01 08:01:55,4625,aluno,10.10.10.20,Logon,Falha,Senha invalida
-2026-09-01 08:02:10,4624,aluno,10.10.10.20,Logon,Sucesso,Autenticacao concluida
-2026-09-01 08:04:22,4688,aluno,LOCAL,Processo,Informacao,Processo de laboratorio iniciado
+﻿DataHora,IdEvento,Usuario,Origem,Acao,Resultado,Detalhes
+2026-09-01 08:01:15,4625,aluno,10.10.10.20,Logon,Falha,Senha inválida
+2026-09-01 08:01:28,4625,aluno,10.10.10.20,Logon,Falha,Senha inválida
+2026-09-01 08:01:41,4625,aluno,10.10.10.20,Logon,Falha,Senha inválida
+2026-09-01 08:01:55,4625,aluno,10.10.10.20,Logon,Falha,Senha inválida
+2026-09-01 08:02:10,4624,aluno,10.10.10.20,Logon,Sucesso,Autenticação concluída
+2026-09-01 08:04:22,4688,aluno,LOCAL,Processo,Informação,Processo de laboratório iniciado
 2026-09-01 08:10:03,4625,visitante,10.10.10.30,Logon,Falha,Conta inexistente

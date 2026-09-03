@@ -1,10 +1,10 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [switch]$MostrarGabarito,
     [string]$ArquivoCenarios
 )
 
-Write-Host 'ATIVIDADE 08 - AMEACA, ATAQUE OU VULNERABILIDADE?' -ForegroundColor Cyan
+Write-Host 'ATIVIDADE 08 - AMEAÇA, ATAQUE OU VULNERABILIDADE?' -ForegroundColor Cyan
 Write-Host ''
 
 if ([string]::IsNullOrWhiteSpace($ArquivoCenarios)) {
@@ -12,14 +12,14 @@ if ([string]::IsNullOrWhiteSpace($ArquivoCenarios)) {
 }
 
 if (-not (Test-Path -LiteralPath $arquivoCenarios)) {
-    Write-Error "Arquivo de cenarios nao encontrado: $arquivoCenarios"
+    Write-Error "Arquivo de cenários não encontrado: $arquivoCenarios"
     return
 }
 
 $cenarios = @(Import-Csv -LiteralPath $arquivoCenarios -Encoding UTF8)
 
 if ($MostrarGabarito) {
-    $cenarios | Select-Object ID, Cenario, Resposta, Justificativa | Format-Table -Wrap -AutoSize
+    $cenarios | Select-Object ID, @{ Name = 'Cenário'; Expression = { $_.Cenario } }, Resposta, Justificativa | Format-Table -Wrap -AutoSize
     return
 }
 
@@ -38,15 +38,15 @@ $numero = 0
 
 foreach ($cenario in $cenarios) {
     $numero++
-    Write-Host "Cenario $($cenario.ID): $($cenario.Cenario)" -ForegroundColor White
-    Write-Host '1 - Ameaca | 2 - Ataque | 3 - Vulnerabilidade' -ForegroundColor DarkGray
+    Write-Host "Cenário $($cenario.ID): $($cenario.Cenario)" -ForegroundColor White
+    Write-Host '1 - Ameaça | 2 - Ataque | 3 - Vulnerabilidade' -ForegroundColor DarkGray
     $entrada = (Read-Host 'Sua resposta').Trim().ToLowerInvariant()
 
     if ($mapaRespostas.ContainsKey($entrada)) {
         $resposta = $mapaRespostas[$entrada]
     }
     else {
-        $resposta = 'Resposta invalida'
+        $resposta = 'Resposta inválida'
     }
 
     if ($resposta -eq $cenario.Resposta) {

@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$ArquivoEventos
 )
@@ -7,10 +7,10 @@ if ([string]::IsNullOrWhiteSpace($ArquivoEventos)) {
     $ArquivoEventos = Join-Path (Join-Path $PSScriptRoot 'dados') 'eventos-seguranca.csv'
 }
 
-Write-Host 'ATIVIDADE 07 - REGISTROS E ANALISE FORENSE' -ForegroundColor Cyan
+Write-Host 'ATIVIDADE 07 - REGISTROS E ANÁLISE FORENSE' -ForegroundColor Cyan
 
 if (-not (Test-Path -LiteralPath $ArquivoEventos)) {
-    Write-Error "Arquivo de eventos nao encontrado: $ArquivoEventos"
+    Write-Error "Arquivo de eventos não encontrado: $ArquivoEventos"
     return
 }
 
@@ -23,26 +23,26 @@ if (-not (Test-Path -LiteralPath $pastaResultado)) {
 }
 
 $eventos = @(Import-Csv -LiteralPath $ArquivoEventos -Encoding UTF8 | Sort-Object DataHora)
-$eventos | Format-Table -AutoSize
+$eventos | Select-Object DataHora, IdEvento, @{ Name = 'Usuário'; Expression = { $_.Usuario } }, Origem, @{ Name = 'Ação'; Expression = { $_.Acao } }, Resultado, Detalhes | Format-Table -AutoSize
 $eventos | Export-Csv -LiteralPath $arquivoLinhaTempo -NoTypeInformation -Encoding UTF8
 
 $falhas = @($eventos | Where-Object { $_.Resultado -eq 'Falha' })
 $gruposPorOrigem = @($falhas | Group-Object Origem | Sort-Object Count -Descending)
 
 Write-Host ''
-Write-Host 'Falhas de autenticacao por origem:' -ForegroundColor Yellow
-$gruposPorOrigem | Select-Object Name, Count | Format-Table -AutoSize
+Write-Host 'Falhas de autenticação por origem:' -ForegroundColor Yellow
+$gruposPorOrigem | Select-Object @{ Name = 'Origem'; Expression = { $_.Name } }, @{ Name = 'Falhas'; Expression = { $_.Count } } | Format-Table -AutoSize
 
 $indicadores = @($gruposPorOrigem | Where-Object { $_.Count -ge 3 } | ForEach-Object {
         [PSCustomObject]@{
             Origem = $_.Name
-            QuantidadeFalhas = $_.Count
-            Interpretacao = 'Indicador que merece investigacao; nao e prova isolada de ataque'
+            'Quantidade de falhas' = $_.Count
+            Interpretação = 'Indicador que merece investigação; não é prova isolada de ataque'
         }
     })
 
 if ($indicadores.Count -eq 0) {
-    Write-Host 'Nenhum padrao de repeticao foi destacado pelo criterio didatico.' -ForegroundColor Green
+    Write-Host 'Nenhum padrão de repetição foi destacado pelo critério didático.' -ForegroundColor Green
 }
 else {
     Write-Host 'Indicadores destacados:' -ForegroundColor Red
@@ -52,4 +52,4 @@ else {
 
 Write-Host ''
 Write-Host "Linha do tempo salva em: $arquivoLinhaTempo" -ForegroundColor Gray
-Write-Host 'Pergunta para discussao: quais evidencias adicionais seriam necessarias antes de concluir que houve um ataque?' -ForegroundColor Yellow
+Write-Host 'Pergunta para discussão: quais evidências adicionais seriam necessárias antes de concluir que houve um ataque?' -ForegroundColor Yellow

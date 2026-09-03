@@ -1,2 +1,2 @@
-Evidencia didatica para o relatorio do mini-SOC.
-O hash deste arquivo deve ser tratado como uma informacao de integridade.
+﻿Evidência didática para o relatório do mini-SOC.
+O hash deste arquivo deve ser tratado como uma informação de integridade.

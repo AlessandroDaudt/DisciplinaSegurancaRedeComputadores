@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [ValidateSet('Demonstrar', 'Criptografar', 'Descriptografar')]
     [string]$Modo = 'Demonstrar',
@@ -6,7 +6,7 @@ param(
     [string]$ArquivoEntrada
 )
 
-Write-Host 'ATIVIDADE 04 - CRIPTOGRAFIA SIMETRICA COM AES' -ForegroundColor Cyan
+Write-Host 'ATIVIDADE 04 - CRIPTOGRAFIA SIMÉTRICA COM AES' -ForegroundColor Cyan
 
 if ([string]::IsNullOrWhiteSpace($ArquivoEntrada)) {
     $ArquivoEntrada = Join-Path (Join-Path $PSScriptRoot 'dados') 'mensagem-confidencial.txt'
@@ -16,7 +16,7 @@ $pastaResultado = Join-Path $PSScriptRoot 'resultado'
 $arquivoCifrado = Join-Path $pastaResultado 'mensagem-confidencial.aes.txt'
 
 if (-not (Test-Path -LiteralPath $arquivoEntrada)) {
-    Write-Error "Mensagem de teste nao encontrada: $arquivoEntrada"
+    Write-Error "Mensagem de teste não encontrada: $arquivoEntrada"
     return
 }
 
@@ -96,7 +96,7 @@ function Recuperar-TextoAes {
     try {
         $pacote = [System.Convert]::FromBase64String($TextoCifrado.Trim())
         if ($pacote.Length -le 16) {
-            throw 'O conteudo cifrado e invalido.'
+            throw 'O conteúdo cifrado é inválido.'
         }
 
         $iv = New-Object byte[] 16
@@ -152,7 +152,7 @@ if ($Modo -eq 'Criptografar' -or $Modo -eq 'Demonstrar') {
 
 if ($Modo -eq 'Descriptografar' -or $Modo -eq 'Demonstrar') {
     if (-not (Test-Path -LiteralPath $arquivoCifrado)) {
-        Write-Error "Arquivo cifrado nao encontrado: $arquivoCifrado"
+        Write-Error "Arquivo cifrado não encontrado: $arquivoCifrado"
         return
     }
 
@@ -166,10 +166,10 @@ if ($Modo -eq 'Descriptografar' -or $Modo -eq 'Demonstrar') {
             Write-Host 'RESULTADO: o texto foi recuperado corretamente usando a mesma chave.' -ForegroundColor Green
         }
         else {
-            Write-Host 'RESULTADO: o texto recuperado e diferente do original.' -ForegroundColor Red
+            Write-Host 'RESULTADO: o texto recuperado é diferente do original.' -ForegroundColor Red
         }
     }
 }
 
 Write-Host ''
-Write-Host 'Pergunta para discussao: qual seria o risco se a mesma chave fosse divulgada?' -ForegroundColor Yellow
+Write-Host 'Pergunta para discussão: qual seria o risco se a mesma chave fosse divulgada?' -ForegroundColor Yellow
