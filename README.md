@@ -28,6 +28,18 @@ Ao concluir as atividades, o estudante deverá ser capaz de:
 
 Cada tópico possui um `README.md` próprio, scripts `.ps1` e uma pasta `dados` com os arquivos de teste necessários.
 
+## Interface principal
+
+O arquivo `interface-principal.ps1` abre um painel simples para selecionar as atividades, consultar o roteiro, abrir os scripts no PowerShell ISE e executar os laboratórios não interativos. A interface não solicita elevação e não altera políticas, serviços ou permissões do Windows.
+
+Para abrir pelo PowerShell ISE, abra o arquivo e pressione `F5`. Fora do ISE, use o Windows PowerShell comum:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\interface-principal.ps1
+```
+
+O parâmetro `-ExecutionPolicy Bypass` vale somente para esse processo e evita exigir alteração da política local do aluno.
+
 ## Requisitos
 
 - Windows 10 ou Windows 11;
@@ -62,6 +74,16 @@ Os arquivos e pastas criados automaticamente durante os exercícios são gravado
 ## Segurança e escopo
 
 Os scripts são demonstrativos. Eles operam sobre arquivos locais de teste e dados sintéticos. A coleta opcional da atividade 09 é somente de leitura. Não execute adaptações destes scripts contra redes, contas, serviços ou dispositivos sem autorização formal.
+
+## Download sem instalar o Git
+
+Se o aluno não tiver Git instalado, abra o Windows PowerShell em uma pasta com permissão de gravação e execute o comando abaixo. Ele baixa e extrai a versão completa da branch `main` diretamente do GitHub:
+
+```powershell
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $base = [Environment]::GetFolderPath('MyDocuments'); $zip = Join-Path $base 'DisciplinaSegurancaRedeComputadores.zip'; Invoke-WebRequest -Uri 'https://github.com/AlessandroDaudt/DisciplinaSegurancaRedeComputadores/archive/refs/heads/main.zip' -OutFile $zip; Expand-Archive -LiteralPath $zip -DestinationPath $base -Force; Write-Host "Arquivos extraidos em $base"
+```
+
+Depois, abra a pasta `DisciplinaSegurancaRedeComputadores-main` dentro de Documentos e execute `interface-principal.ps1` no PowerShell ISE.
 
 ## Referência conceitual
 
