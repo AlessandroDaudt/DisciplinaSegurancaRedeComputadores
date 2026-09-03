@@ -4,6 +4,36 @@ Repositório de apoio para a disciplina de Segurança de Redes de Computadores. 
 
 > Uso acadêmico e laboratorial. Execute os scripts somente no ambiente local de testes e com autorização.
 
+## Primeiro acesso: instalar e baixar o material
+
+Abra o **Windows PowerShell** e execute o comando abaixo para instalar o Git pelo Gerenciador de Pacotes do Windows (`winget`):
+
+```powershell
+winget install --id Git.Git -e --source winget
+```
+
+Quando a instalação terminar, feche o PowerShell e abra uma nova janela. Confira se o Git está disponível:
+
+```powershell
+git --version
+```
+
+Em seguida, escolha a pasta onde o material será salvo, baixe o repositório e entre nele:
+
+```powershell
+New-Item -ItemType Directory -Path C:\projetos -Force
+Set-Location C:\projetos
+git clone https://github.com/AlessandroDaudt/DisciplinaSegurancaRedeComputadores.git
+Set-Location .\DisciplinaSegurancaRedeComputadores
+```
+
+Se a pasta `C:\projetos\DisciplinaSegurancaRedeComputadores` já existir porque você já baixou o material antes, não execute o `git clone` novamente. Abra a pasta e atualize os arquivos com:
+
+```powershell
+Set-Location C:\projetos\DisciplinaSegurancaRedeComputadores
+git pull
+```
+
 ## Como começar
 
 1. Escolha a aula que deseja estudar e leia o README da pasta.
