@@ -96,7 +96,7 @@ O bind em `127.0.0.1`, os dados fictícios e o alvo fixo da ferramenta reduzem o
 
 Após a geração atual, foram confirmados:
 
-- 12 zips extraíveis, sem `GABARITO`, `SEGREDOS`, fonte do professor ou pacote de professor;
+- 12 zips extraíveis e 12 cópias descompactadas equivalentes, sem `GABARITO`, `SEGREDOS`, fonte do professor ou pacote de professor;
 - 12 senhas de login únicas e 12 PINs únicos, mantidos somente no manifesto privado temporário usado no teste;
 - 12 PCAPs com hashes distintos e o usuário correspondente em cada captura;
 - 12 contas e 12 materiais em cada pacote;

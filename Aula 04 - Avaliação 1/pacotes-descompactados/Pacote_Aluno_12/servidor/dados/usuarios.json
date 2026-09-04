@@ -1,0 +1,74 @@
+[
+  {
+    "username": "aluno01",
+    "user_sha256": "d26268c7e1c407ee81adb6cc3228b8ba184af504ddd91e7db0a731b6c93c54dc",
+    "password_sha256": "962d33c012c4b0dbba6b2964c0554aebbc7e6b407f1a4b7cdff1d8f800f2362e",
+    "material": "material_aluno01.enc"
+  },
+  {
+    "username": "aluno02",
+    "user_sha256": "77a568016aab7ddfb8b28f8e127d28458ae8dc39c41744f592e33776170e8942",
+    "password_sha256": "182403e4368a60eeb1d30585ead47723da87b4025621e833a61cd6c833917500",
+    "material": "material_aluno02.enc"
+  },
+  {
+    "username": "aluno03",
+    "user_sha256": "03189366fa265a73a67a4883b3249895c2b0c633121f95aec3fc4870e29c471a",
+    "password_sha256": "21b395043628f52ac99b98aaaa971a1bbac052703db959ee4f57087f06870b81",
+    "material": "material_aluno03.enc"
+  },
+  {
+    "username": "aluno04",
+    "user_sha256": "66bb1b707adbaf5d29779e1403e7c04cab17f70255d09178bc581c18ad8187a2",
+    "password_sha256": "ed901bbbed6534122c612ad0c62286e1862c86632014ef77933cb82e85c5bb5e",
+    "material": "material_aluno04.enc"
+  },
+  {
+    "username": "aluno05",
+    "user_sha256": "20cee7385b1c37cc8fd1aeaea0f88c9d6cf9adde40afd9612dbc5b646ed183ff",
+    "password_sha256": "018fe2d11fd32b4326e7d3908121ffe5dd9eda6bdf37e3b67edb34dfc455f416",
+    "material": "material_aluno05.enc"
+  },
+  {
+    "username": "aluno06",
+    "user_sha256": "95714fac194743f1cfb9016ab9d6da0d139cbefd8a7903389ee7868567838175",
+    "password_sha256": "c0bf8122967ff991838b973c24f6bd4bd8800148ee027366decd946a7b9202c7",
+    "material": "material_aluno06.enc"
+  },
+  {
+    "username": "aluno07",
+    "user_sha256": "e7cb3ce4fc447b700d66164f41d295618e772d44b73783fdfb9ce45430dceadd",
+    "password_sha256": "5c469f3e22bc6be5d72151f204405585a3bf4409c939e39e37b0f8ee02874019",
+    "material": "material_aluno07.enc"
+  },
+  {
+    "username": "aluno08",
+    "user_sha256": "dccc677d77c985504482fbdf5591a5eb8000ff9819d2425b92b2492bc397e0c4",
+    "password_sha256": "547e50745a763c619134ed7b76e401f9d74c7246da0ac7e8310331663a98e0da",
+    "material": "material_aluno08.enc"
+  },
+  {
+    "username": "aluno09",
+    "user_sha256": "cee245ddabc8e591042b4184352213c74730303fd1f4702b77a6092aaafe9231",
+    "password_sha256": "db16a6c10fa8b66a2943ea78d600816465934e78282a8c42406c3bc6d7b12011",
+    "material": "material_aluno09.enc"
+  },
+  {
+    "username": "aluno10",
+    "user_sha256": "3e9b2138acc3851a5c2f82796cf2ff66ec05592678ba56947474a97fbfcf6edf",
+    "password_sha256": "5f1c1d899f2c448ba426da0a1bf6ccb2bd9752b2806e29af3bc741ce0e040ea1",
+    "material": "material_aluno10.enc"
+  },
+  {
+    "username": "aluno11",
+    "user_sha256": "f36d828a866a339e52f5a94dadfc409bf7b65221ba6dcd139ff7a1de8801e2a4",
+    "password_sha256": "487b0064ef32bca2ab76100ccf218ab418b587d63dcdc6e124c542b79b5f1707",
+    "material": "material_aluno11.enc"
+  },
+  {
+    "username": "aluno12",
+    "user_sha256": "2fab76766aa1168b6d0d0ca5e9bb77bd91fab5bac794428f487729c27fedd215",
+    "password_sha256": "33f50211bb55e9bb4536a0178e8b43d67af5478a4f698048788641d8e1f98880",
+    "material": "material_aluno12.enc"
+  }
+]

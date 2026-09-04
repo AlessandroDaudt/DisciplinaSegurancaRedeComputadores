@@ -17,11 +17,79 @@ Cada pacote contém:
 - a ferramenta PowerShell para descobrir a senha do login e o PIN do material;
 - um roteiro e uma folha de respostas, sem gabarito.
 
+Além dos arquivos compactados, as cópias completas ficam disponíveis em
+`pacotes-descompactados/Pacote_Aluno_01` até `pacotes-descompactados/Pacote_Aluno_12`.
+Essas pastas podem ser usadas para inspeção ou execução direta; os respectivos
+`.zip` têm o mesmo conteúdo para distribuição aos alunos.
+
 Não há pacote de professor versionado. O repositório não deve conter respostas de senhas, PINs ou pares de arquivos.
+
+## Preparar o ambiente da disciplina (todos os labs)
+
+Abra o Windows PowerShell e instale apenas os componentes necessários. Os IDs
+abaixo são os IDs oficiais usados pelo `winget`:
+
+```powershell
+# Repositório e atividades que usam Git
+winget install --id Git.Git --exact --source winget --accept-source-agreements --accept-package-agreements
+
+# Atividades de análise de tráfego
+winget install --id WiresharkFoundation.Wireshark --exact --source winget --accept-source-agreements --accept-package-agreements
+
+# Necessário somente para labs/scripts Python ou para gerar os pacotes da Aula 04
+winget install --id Python.Python.3.13 --exact --source winget --accept-source-agreements --accept-package-agreements
+
+# Necessário para a Aula 04 e para qualquer lab que use containers
+winget install --id Docker.DockerDesktop --exact --source winget --accept-source-agreements --accept-package-agreements
+```
+
+Se um componente já estiver instalado, o `winget` informa isso; não é preciso
+reinstalá-lo. Depois da instalação, abra um novo PowerShell e valide o que for
+usado no laboratório:
+
+```powershell
+git --version
+python --version
+docker --version
+docker compose version
+winget list --id WiresharkFoundation.Wireshark --exact
+```
+
+O Docker Desktop deve estar iniciado antes de executar um lab com Docker. O
+Python não é necessário para executar o pacote de aluno da Aula 04, pois o
+servidor roda dentro do container; ele é útil para os labs que usam Python e
+para a geração docente dos pacotes.
+
+## Clonar ou ressincronizar o repositório
+
+Na primeira instalação, clone o repositório:
+
+```powershell
+$repoPath = 'C:\projetos\DisciplinaSegurancaRedeComputadores'
+New-Item -ItemType Directory -Path (Split-Path -Parent $repoPath) -Force | Out-Null
+Set-Location -LiteralPath (Split-Path -Parent $repoPath)
+git clone https://github.com/AlessandroDaudt/DisciplinaSegurancaRedeComputadores.git
+Set-Location -LiteralPath $repoPath
+```
+
+Se a pasta já existir, faça o resync sem apagar alterações locais:
+
+```powershell
+$repoPath = 'C:\projetos\DisciplinaSegurancaRedeComputadores'
+Set-Location -LiteralPath $repoPath
+git status --short
+git fetch --prune origin
+git pull --ff-only origin main
+```
+
+Se `git status --short` mostrar alterações, salve-as em um commit ou use um
+`git stash` antes do `pull`; conflitos devem ser revisados manualmente. Não use
+`git reset --hard` para “corrigir” o resync, pois esse comando pode apagar o
+trabalho local.
 
 ## Gerar novos pacotes
 
-O arquivo [gerar-pacotes.ps1](gerar-pacotes.ps1) cria os 12 zips com senhas e PINs aleatórios, PCAPs distintos e materiais criptografados. Por padrão, ele não grava o controle das respostas:
+O arquivo [gerar-pacotes.ps1](gerar-pacotes.ps1) cria os 12 zips e as respectivas cópias descompactadas, com senhas e PINs aleatórios, PCAPs distintos e materiais criptografados. Por padrão, ele não grava o controle das respostas:
 
 ```powershell
 Set-ExecutionPolicy -Scope Process Bypass
@@ -34,7 +102,11 @@ Se o docente precisar de um controle privado para correção, informe um caminho
 .\gerar-pacotes.ps1 -PrivateManifestPath C:\caminho-privado\aula04-manifesto.txt
 ```
 
-Nunca salve esse manifesto na pasta do Git nem o distribua aos alunos. Cada execução gera novas credenciais e invalida os pacotes anteriores.
+Nunca salve esse manifesto na pasta do Git nem o distribua aos alunos.
+
+Além dos zips, o comando recria as cópias descompactadas em
+`pacotes-descompactados\`. Cada execução gera novas credenciais e invalida os
+pacotes anteriores.
 
 ## Execução do pacote do aluno
 

@@ -269,6 +269,8 @@ function Copy-Template([string]$Source, [string]$Destination, [hashtable]$Replac
 try {
     if (-not (Test-Path -LiteralPath $OutputDirectory)) { New-Item -ItemType Directory -Path $OutputDirectory -Force | Out-Null }
     New-Item -ItemType Directory -Path $stagingRoot -Force | Out-Null
+    $unpackedRoot = Join-Path $OutputDirectory 'pacotes-descompactados'
+    New-Item -ItemType Directory -Path $unpackedRoot -Force | Out-Null
     $materialRoot = Join-Path $stagingRoot 'materiais'
     $pcapRoot = Join-Path $stagingRoot 'pcaps'
     New-Item -ItemType Directory -Path $materialRoot -Force | Out-Null
@@ -361,6 +363,9 @@ services:
     restart: unless-stopped
 "@
         Write-TextFile (Join-Path $packageStage 'docker-compose.yml') $compose.TrimStart()
+        $unpackedPath = Join-Path $unpackedRoot ("Pacote_Aluno_{0:D2}" -f $studentIndex)
+        if (Test-Path -LiteralPath $unpackedPath) { Remove-Item -LiteralPath $unpackedPath -Recurse -Force }
+        Copy-Item -LiteralPath $packageStage -Destination $unpackedRoot -Recurse
         $zipPath = Join-Path $OutputDirectory ("Pacote_Aluno_{0:D2}.zip" -f $studentIndex)
         Compress-Archive -Path $packageStage -DestinationPath $zipPath -Force
     }
@@ -377,7 +382,7 @@ services:
         Write-TextFile $manifestFull ($manifestLines -join "`r`n")
         Write-Host "Controle privado gravado fora do diretório de saída."
     }
-    Write-Host 'Foram gerados 12 pacotes individualizados sem gabarito.'
+    Write-Host 'Foram gerados 12 pacotes individualizados sem gabarito (ZIP + cópia descompactada).'
 } finally {
     $rng.Dispose()
     if (Test-Path -LiteralPath $stagingRoot) { Remove-Item -LiteralPath $stagingRoot -Recurse -Force }

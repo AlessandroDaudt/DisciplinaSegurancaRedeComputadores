@@ -1,0 +1,9 @@
+services:
+  web:
+    build:
+      context: ./servidor
+    environment:
+      FLASK_SECRET: "YLvXbDk7tIuwl6XqJLowOHCg/gH6l9i/PqDG64CujRg="
+    ports:
+      - "127.0.0.1:8080:8080"
+    restart: unless-stopped

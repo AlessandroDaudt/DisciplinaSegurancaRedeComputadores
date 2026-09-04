@@ -10,5 +10,10 @@
 **/__pycache__/
 *.pyc
 
+# As cópias descompactadas da Aula 04 são entregáveis intencionais, inclusive
+# os materiais .enc e o app.pyc usado pelo container.
+!Aula 04 - Avaliação 1/pacotes-descompactados/
+!Aula 04 - Avaliação 1/pacotes-descompactados/**
+
 # Cópia local duplicada do PDF de Tópico 1, mantida fora do conteúdo versionado
 /Aula 02/TISRC-TÓPICO1-CONTEÚDO.pdf

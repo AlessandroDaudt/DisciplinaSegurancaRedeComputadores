@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Laboratório de Segurança</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><main class="card"><h1>Portal Interno</h1><p class="sub">Laboratório de Segurança de Redes</p>
+{% if error %}<div class="error">{{ error }}</div>{% endif %}
+<form method="post" action="/login"><label>Usuário</label><input name="username" autocomplete="off" required>
+<label>Senha</label><input name="password" type="password" required><button type="submit">Entrar</button></form>
+<p class="hint">Ambiente educacional local com {{ account_count }} contas.</p></main></body></html>
