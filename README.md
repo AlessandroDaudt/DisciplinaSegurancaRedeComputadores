@@ -44,7 +44,7 @@ git pull
 Para iniciar a interface pelo Windows PowerShell 5.1:
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\Aula 02\topico-02-integridade-e-hash\interface-atividade-02-hash-integridade.ps1"
+powershell.exe -NoProfile -ExecutionPolicy Bypass
 ```
 
 O parâmetro `-ExecutionPolicy Bypass` vale apenas para o processo iniciado e não altera a política permanente do computador.
