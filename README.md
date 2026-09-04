@@ -58,7 +58,7 @@ Não existe mais uma tela geral: cada atividade possui uma interface própria, c
 | [Aula 01](Aula%2001/) | Material em PDF do Tópico 1 — Fundamentos e tríade CIA |
 | [Aula 02](Aula%2002/) | Atividades práticas em PowerShell, organizadas por tópico |
 | [Aula 03](Aula%2003/) | Segurança Física: material em PDF e atividades práticas em PowerShell |
-| [Aula 04 - Avaliação 1](Aula%2004%20-%20Avalia%C3%A7%C3%A3o%201/) | Espaço reservado para a primeira avaliação |
+| [Aula 04 - Avaliação 1](Aula%2004%20-%20Avalia%C3%A7%C3%A3o%201/) | Laboratório individualizado para uma turma de 12 alunos, com PCAPs, contas e materiais criptografados distintos |
 | [Aula 05](Aula%2005/) | Material em PDF do Tópico 4 — Autenticidade e responsabilização |
 | [Aula 06 - Avaliação 2](Aula%2006%20-%20Avalia%C3%A7%C3%A3o%202/) | Material em PDF do Tópico 5 — Ameaças, ataques e mini-SOC |
 | [Aula 07 - Avaliação 3](Aula%2007%20-%20Avalia%C3%A7%C3%A3o%203/) | Espaço reservado para a terceira avaliação |

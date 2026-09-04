@@ -1,37 +1,69 @@
 # Aula 04 — Avaliação 1
 
-Esta pasta contém um laboratório isolado para a primeira avaliação da disciplina. A atividade aborda análise de PCAP, força bruta online contra um login deliberadamente vulnerável e força bruta offline contra um arquivo criptografado.
+Laboratório individualizado para uma turma de 12 alunos. Cada pacote de aluno contém um PCAP próprio; a aplicação local possui 12 contas e associa cada conta a um material criptografado diferente.
 
-Para a análise detalhada do conteúdo, do fluxo e dos cuidados de segurança, consulte [ANALISE_PACOTES.md](ANALISE_PACOTES.md).
+Para conhecer a estrutura, o fluxo e as validações, consulte [ANALISE_PACOTES.md](ANALISE_PACOTES.md).
 
-## Pacotes disponíveis
+## Pacotes
 
-| Arquivo | Uso | Conteúdo |
-| --- | --- | --- |
-| [Pacote_Aluno.zip](Pacote_Aluno.zip) | Distribuir à turma | Laboratório Docker, ferramenta PowerShell, PCAP, roteiro e folha de respostas |
-| [Pacote_Professor.zip](Pacote_Professor.zip) | Manter somente com o docente | Pacote do aluno, fonte do servidor, preparação, gabarito e segredos de validação |
-| [Laboratorio_Completo.zip](Laboratorio_Completo.zip) | Arquivo do docente | Reúne o pacote do aluno, o pacote do professor e uma orientação de distribuição |
+Distribua exatamente um pacote por aluno:
 
-Não distribua `Pacote_Professor.zip` nem `Laboratorio_Completo.zip` aos alunos: ambos carregam materiais que revelam a solução da avaliação.
+`Pacote_Aluno_01.zip`, `Pacote_Aluno_02.zip`, `Pacote_Aluno_03.zip`, `Pacote_Aluno_04.zip`, `Pacote_Aluno_05.zip`, `Pacote_Aluno_06.zip`, `Pacote_Aluno_07.zip`, `Pacote_Aluno_08.zip`, `Pacote_Aluno_09.zip`, `Pacote_Aluno_10.zip`, `Pacote_Aluno_11.zip` e `Pacote_Aluno_12.zip`.
 
-## Fluxo da atividade
+Cada pacote contém:
 
-1. O docente distribui somente `Pacote_Aluno.zip`.
-2. O aluno extrai o pacote no Windows, lê o README interno e inicia o laboratório com `Iniciar-Laboratorio.ps1`.
-3. A aplicação Flask fica disponível apenas em `http://127.0.0.1:8080`.
-4. O aluno analisa `captura/captura_login.pcap` no Wireshark para identificar o usuário.
-5. A ferramenta `ferramenta/Laboratorio-Seguranca.ps1` testa o espaço de senhas do login e, depois do download autenticado, testa o espaço de PINs de `desafio.enc`.
-6. O resultado é produzido em uma pasta `resultado`, que não deve ser versionada.
+- um único `captura/captura_login.pcap`, diferente dos demais;
+- a aplicação Flask com as 12 contas e os 12 materiais;
+- a ferramenta PowerShell para descobrir a senha do login e o PIN do material;
+- um roteiro e uma folha de respostas, sem gabarito.
 
-## Requisitos
+Não há pacote de professor versionado. O repositório não deve conter respostas de senhas, PINs ou pares de arquivos.
+
+## Gerar novos pacotes
+
+O arquivo [gerar-pacotes.ps1](gerar-pacotes.ps1) cria os 12 zips com senhas e PINs aleatórios, PCAPs distintos e materiais criptografados. Por padrão, ele não grava o controle das respostas:
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+.\gerar-pacotes.ps1
+```
+
+Se o docente precisar de um controle privado para correção, informe um caminho fora do repositório:
+
+```powershell
+.\gerar-pacotes.ps1 -PrivateManifestPath C:\caminho-privado\aula04-manifesto.txt
+```
+
+Nunca salve esse manifesto na pasta do Git nem o distribua aos alunos. Cada execução gera novas credenciais e invalida os pacotes anteriores.
+
+## Execução do pacote do aluno
+
+No Windows, dentro da pasta extraída:
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+.\Iniciar-Laboratorio.ps1
+```
+
+Depois, abra o PCAP individual no Wireshark e execute:
+
+```powershell
+.\ferramenta\Laboratorio-Seguranca.ps1
+```
+
+O portal fica disponível em `http://127.0.0.1:8080`. Após o login, o aluno baixa o `material_*.enc` correspondente à conta descoberta. A ferramenta extrai 14 arquivos — `arquivo01.txt` até `arquivo14.txt` — em `resultado/documentos/`; o objetivo final é agrupar os sete pares que possuem o mesmo SHA-256.
+
+## Requisitos e segurança
 
 - Windows 10 ou Windows 11;
 - Windows PowerShell 5.1 ou superior;
-- Docker Desktop com o comando `docker compose` disponível;
-- Wireshark para a análise do PCAP.
+- Docker Desktop com `docker compose`;
+- Wireshark.
 
-O primeiro build pode precisar de acesso à internet para obter a imagem `python:3.13-slim` e instalar Flask. Depois que a imagem estiver disponível, a execução da atividade ocorre localmente. O daemon do Docker precisa estar iniciado antes de executar o script de inicialização.
+O primeiro build pode precisar de internet para obter `python:3.13-slim` e Flask. A aplicação e a ferramenta usam somente `127.0.0.1` depois da instalação. Os dados são fictícios e as vulnerabilidades são intencionais para a aula; não use a ferramenta contra redes, contas ou serviços externos.
 
-## Uso seguro
+Para encerrar:
 
-O material usa dados fictícios e fixa o alvo em localhost, mas contém vulnerabilidades intencionais para fins didáticos. Execute-o somente no ambiente da disciplina e não adapte a ferramenta para endereços, contas ou serviços de terceiros sem autorização.
+```powershell
+.\Parar-Laboratorio.ps1
+```

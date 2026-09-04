@@ -1,104 +1,107 @@
 # Análise dos pacotes — Aula 04
 
-## Resumo
+## Modelo da turma
 
-Os arquivos são três níveis de distribuição do mesmo laboratório:
+O laboratório foi preparado para 12 alunos. O docente entrega um pacote numerado para cada pessoa:
 
-- `Pacote_Aluno.zip`: ambiente executável e roteiro da avaliação;
-- `Pacote_Professor.zip`: pacote do aluno mais materiais reservados ao docente;
-- `Laboratorio_Completo.zip`: contêiner de distribuição que reúne os dois pacotes e uma nota de orientação.
+| Pacote | PCAP entregue | Conta identificada | Material liberado após o login |
+| --- | --- | --- | --- |
+| `Pacote_Aluno_01.zip` | exclusivo do pacote 01 | uma conta `aluno01` | `material_aluno01.enc` |
+| … | cada pacote tem bytes próprios | uma conta correspondente ao número | um material correspondente |
+| `Pacote_Aluno_12.zip` | exclusivo do pacote 12 | uma conta `aluno12` | `material_aluno12.enc` |
 
-O objetivo pedagógico é mostrar que um algoritmo criptográfico forte não compensa credenciais de baixa entropia nem controles de autenticação ausentes.
+O PCAP de cada pacote é diferente e contém somente o usuário daquela distribuição. A aplicação copiada em cada pacote conhece as 12 contas e os 12 materiais, mas a rota de download usa o usuário da sessão para selecionar o material correspondente.
 
-## O que cada pacote faz
+O repositório não contém pacote de professor, gabarito, senha em claro, PIN em claro ou tabela de respostas. O gerador só cria um manifesto de respostas quando o docente informa explicitamente um caminho privado fora da pasta versionada.
 
-### `Pacote_Aluno.zip`
+## Conteúdo de cada pacote de aluno
 
-É o pacote entregue à turma. Ele contém:
+Cada `Pacote_Aluno_XX.zip` possui 27 arquivos externos:
 
 | Caminho | Função |
 | --- | --- |
-| `docker-compose.yml` | Constrói e inicia o serviço web; publica a porta `8080` somente em `127.0.0.1` e injeta os hashes das credenciais do laboratório. |
-| `Iniciar-Laboratorio.ps1` | Confere se o Docker está disponível e executa `docker compose up -d --build`. |
-| `Parar-Laboratorio.ps1` | Encerra e remove o ambiente com `docker compose down`. |
-| `ferramenta/Laboratorio-Seguranca.ps1` | Interface gráfica Windows Forms com duas abas: tentativa de senhas do login e tentativa de PINs do arquivo. O alvo é fixo em localhost. |
-| `roteiro/ATIVIDADE.md` | Enunciado, regras de escopo, etapas e perguntas da avaliação. |
-| `roteiro/RESPOSTAS.md` | Folha para registrar evidências e respostas. |
-| `captura/captura_login.pcap` | Captura sintética para identificar o usuário e observar que a senha não foi enviada. |
-| `servidor/Dockerfile` e `requirements.txt` | Definem uma imagem Python 3.13 mínima com Flask 3.1.2. |
-| `servidor/app/app.pyc` | Bytecode do servidor Flask usado pelo aluno. A versão legível do fonte fica no pacote do professor. |
-| `servidor/app/templates` e `static` | Tela de login, área restrita e folha de estilos. |
-| `servidor/dados/desafio.enc` | Arquivo que só pode ser baixado depois da autenticação e que é usado na segunda etapa. |
+| `docker-compose.yml` | Constrói o servidor e publica `127.0.0.1:8080`. |
+| `Iniciar-Laboratorio.ps1` | Inicia o laboratório com `docker compose up -d --build`. |
+| `Parar-Laboratorio.ps1` | Remove o container e a rede do laboratório. |
+| `ferramenta/Laboratorio-Seguranca.ps1` | Interface Windows Forms para força bruta online do login e offline do material. |
+| `roteiro/ATIVIDADE.md` | Enunciado com PCAP, login, descriptografia e casamento por hash. |
+| `roteiro/RESPOSTAS.md` | Folha de respostas sem valores preenchidos. |
+| `captura/captura_login.pcap` | Única captura do pacote, específica do aluno. |
+| `servidor/app/app.pyc` | Bytecode do servidor Flask; o fonte fica no diretório `modelo` do repositório para geração, não no pacote entregue. |
+| `servidor/dados/usuarios.json` | 12 nomes, hashes de usuário/senha e associação de cada usuário ao material; não contém senhas ou PINs em claro. |
+| `servidor/dados/materiais/material_aluno01.enc` … `material_aluno12.enc` | 12 materiais criptografados, cada um com PIN próprio. |
+| `servidor/app/templates` e `static` | Telas do portal e folha de estilos. |
 
-### `Pacote_Professor.zip`
+## Geração
 
-É um pacote de apoio ao docente. Além de uma cópia byte a byte do `Pacote_Aluno.zip`, inclui:
+O [gerar-pacotes.ps1](gerar-pacotes.ps1) é o único gerador necessário. Ele:
 
-- `PREPARACAO.md`: conferências e instruções para preparar a aula;
-- `GABARITO.md`: respostas esperadas, conceitos e sugestão de pontuação;
-- `SEGREDOS.txt`: valores de validação que não devem ser distribuídos;
-- `codigo_fonte_servidor/app.py`: fonte legível da aplicação Flask.
+1. cria 12 usuários `aluno01` a `aluno12`;
+2. sorteia 12 senhas numéricas de quatro dígitos, todas diferentes;
+3. sorteia 12 PINs decimais de seis dígitos, todos diferentes;
+4. grava somente hashes das credenciais em `usuarios.json`;
+5. cria 12 PCAPs com endereços, portas, sequências e usuário distintos;
+6. cria um material criptografado por usuário;
+7. empacota os arquivos sem fonte do servidor e sem material reservado.
 
-O bytecode no pacote do aluno reduz a inspeção casual do código durante a avaliação, mas não constitui uma medida de proteção para um sistema real.
+As senhas e os PINs existem em memória durante a geração. O parâmetro opcional `-PrivateManifestPath` produz um controle para o docente; o script rejeita um caminho dentro do diretório de saída para evitar que o gabarito seja incluído por acidente.
 
-### `Laboratorio_Completo.zip`
+## Fluxo técnico
 
-É um envelope de distribuição com três entradas: `Pacote_Aluno.zip`, `Pacote_Professor.zip` e `LEIA_PRIMEIRO.txt`. A orientação interna confirma que apenas o pacote do aluno deve ser entregue à turma. Como ele contém o pacote do professor, deve ser tratado como material reservado ao docente.
+### 1. PCAP individual
 
-## Fluxo técnico completo
+Cada captura é um PCAP clássico de cinco quadros: handshake TCP sintético, ACK, requisição HTTP e ACK final. A requisição é um `POST /identificar` com `Content-Type: application/x-www-form-urlencoded` e corpo contendo somente `username=...`. Não há senha no PCAP.
 
-### 1. Análise do PCAP
-
-O PCAP é uma captura clássica de cinco quadros: handshake TCP simplificado, uma requisição HTTP e o ACK correspondente. A requisição é um `POST` para `/identificar`, com `Content-Type: application/x-www-form-urlencoded` e um corpo que contém somente o campo `username`.
-
-O endereço do cliente é `192.168.56.10` e o do servidor é `192.168.56.20`. A senha não aparece. O caminho `/identificar` é uma amostra didática independente; ele não é uma rota do servidor Flask em execução, que usa `/login` e `/api/login`.
+O caminho `/identificar` é uma amostra didática independente; o servidor em execução usa `/login` e `/api/login`.
 
 ### 2. Login online
 
-O servidor compara o hash SHA-256 do usuário e o hash SHA-256 de uma senha precedida por um salt fixo, ambos recebidos por variáveis de ambiente no Compose. A rota usada pela ferramenta é `POST /api/login`.
+O servidor carrega os 12 registros de `usuarios.json`. Para cada conta, ele compara o SHA-256 do usuário e o SHA-256 de `lab-salt-2026:` concatenado à senha. A ferramenta usa `POST /api/login` e testa sequencialmente `0000` a `9999`.
 
-A primeira aba testa sequencialmente todas as combinações de `0000` a `9999`. Quando recebe HTTP 200, considera a senha encontrada. O portal web usa `POST /login`, cria uma sessão Flask e libera `/area` e `/download/desafio.enc` para uma sessão autenticada.
+Depois do login web em `POST /login`, a sessão Flask libera `/area` e `/download/material.enc`. A aplicação localiza o registro da sessão e envia somente o material associado àquele usuário.
 
-### 3. Arquivo criptografado
+### 3. Material criptografado
 
-O arquivo usa a seguinte estrutura lógica:
+Cada `material_*.enc` possui a estrutura:
 
 ```text
-desafio.enc = IV de 16 bytes || ciphertext AES-CBC
-chave      = SHA-256(ASCII do PIN decimal de 6 dígitos)
-plaintext  = marcador conhecido de 16 bytes || ZIP || padding PKCS#7
+material.enc = IV aleatório de 16 bytes || ciphertext AES-CBC
+chave        = SHA-256(ASCII do PIN decimal de 6 dígitos)
+plaintext    = marcador conhecido de 16 bytes || ZIP || padding PKCS#7
 ```
 
-A segunda aba testa `000000` a `999999`, valida o primeiro bloco contra o marcador conhecido e, quando encontra uma chave compatível, descriptografa o conteúdo completo. Em seguida cria `resultado/documentos.zip` e extrai `resultado/documentos/`.
+A ferramenta testa `000000` a `999999`, valida o primeiro bloco conhecido e, ao encontrar o PIN, descriptografa o ZIP completo em `resultado/documentos.zip`.
 
-O ZIP interno contém um arquivo de conclusão, um inventário CSV, uma descrição JSON de rede e uma política fictícia. Os valores do gabarito não são repetidos nesta documentação.
+### 4. Casamento dos arquivos
 
-O AES-256 não é quebrado nesse cenário. O problema é que um PIN decimal de seis dígitos oferece no máximo `log2(1.000.000) ≈ 19,93` bits de entropia, e o teste é offline: depois do download, cada tentativa ocorre localmente, sem depender de novas respostas do servidor.
+Cada material contém exatamente `arquivo01.txt` até `arquivo14.txt`. Existem sete variantes de whitespace do mesmo texto semântico; cada variante é usada em dois arquivos byte a byte idênticos. Portanto, cada material possui sete hashes distintos e cada hash aparece exatamente duas vezes. Espaços no fim das linhas, linhas em branco e finais de linha diferentes são suficientes para produzir hashes distintos sem alterar o texto lido.
+
+O material também recebe um identificador de conjunto dentro do texto comum, de forma que os 12 materiais sejam diferentes além da chave e do IV. Dentro de um mesmo material, os 14 arquivos continuam semanticamente iguais.
 
 ## Avaliação de segurança
 
-As fragilidades abaixo são intencionais e fazem parte do exercício:
+As fragilidades são deliberadas:
 
-| Elemento | Efeito didático | Tratamento em um sistema real |
+| Fragilidade | Demonstração | Mitigação real |
 | --- | --- | --- |
-| Sem rate limiting, bloqueio ou MFA | Permite automatizar o login online. | Limitação progressiva, detecção de anomalias, bloqueio controlado e MFA. |
-| Senha numérica curta | Reduz o espaço de busca para 10.000 tentativas. | Senha de alta entropia e política contra credenciais fracas. |
-| SHA-256 rápido com salt fixo | Torna a validação de senha inadequada para produção. | Argon2id, scrypt ou bcrypt com salt aleatório por credencial. |
-| HTTP sem TLS | Expõe requisições em redes reais. | HTTPS com certificados válidos e configuração segura de sessão. |
-| PIN de seis dígitos para derivar a chave | Torna o AES forte vulnerável a busca offline. | Segredo aleatório de alta entropia ou KDF resistente a busca, com parâmetros adequados. |
-| IV fixo e ausência de autenticação criptográfica | Não oferece as garantias esperadas para uso geral. | IV/nonce aleatório por mensagem e AEAD, como AES-GCM ou ChaCha20-Poly1305. |
-| `FLASK_SECRET` definido no Compose e fallback no código | Facilita falsificação de sessão se o serviço sair do laboratório. | Segredo aleatório fora do repositório e cookies com flags de segurança. |
+| Ausência de rate limiting, bloqueio e MFA | Viabiliza força bruta online. | Limitação progressiva, detecção de anomalias, bloqueio controlado e MFA. |
+| Senha numérica de quatro dígitos | Espaço de apenas 10.000 tentativas. | Senhas de alta entropia e proteção contra credenciais fracas. |
+| PIN de seis dígitos | Espaço de apenas 1.000.000 de chaves, cerca de 19,93 bits. | Segredo aleatório de alta entropia e KDF adequada. |
+| SHA-256 rápido para senha/PIN | Facilita testes offline. | Argon2id, scrypt ou bcrypt para senhas; parâmetros adequados para derivação. |
+| HTTP e segredo Flask de laboratório | Não é apropriado para produção. | HTTPS, segredo fora do repositório e cookies com flags de segurança. |
 
-Os controles que reduzem o risco operacional do exercício são o bind em `127.0.0.1`, o uso de dados fictícios e a ausência de necessidade de elevação administrativa.
+O bind em `127.0.0.1`, os dados fictícios e o alvo fixo da ferramenta reduzem o risco operacional do exercício; eles não transformam as vulnerabilidades em controles de produção.
 
-## Validações realizadas
+## Validação do conteúdo gerado
 
-- `Laboratorio_Completo.zip` abre e contém 3 entradas; `Pacote_Aluno.zip` contém 15; `Pacote_Professor.zip` contém 5.
-- A cópia de `Pacote_Aluno.zip` dentro do pacote do professor tem o mesmo SHA-256 do arquivo principal.
-- O `docker-compose.yml` foi validado pelo Compose.
-- Os três scripts PowerShell foram analisados sem erros de sintaxe.
-- O fonte Python do professor compila com Python 3.13, mesma linha da imagem usada no Dockerfile.
-- O PCAP foi decodificado e confirmou os cinco quadros, os endereços IP, o `POST` e a ausência de senha.
-- O `desafio.enc` foi validado com o material reservado do professor e produziu um ZIP interno legível com os quatro documentos esperados.
+Após a geração atual, foram confirmados:
 
-A inicialização ponta a ponta do contêiner ficou pendente nesta análise porque o daemon do Docker Desktop não estava em execução no ambiente. Antes da aula, o docente deve iniciar o Docker Desktop e repetir o teste descrito em `Pacote_Professor/PREPARACAO.md`.
+- 12 zips extraíveis, sem `GABARITO`, `SEGREDOS`, fonte do professor ou pacote de professor;
+- 12 senhas de login únicas e 12 PINs únicos, mantidos somente no manifesto privado temporário usado no teste;
+- 12 PCAPs com hashes distintos e o usuário correspondente em cada captura;
+- 12 contas e 12 materiais em cada pacote;
+- 14 nomes corretos por material, texto semântico comum e sete pares exatos de SHA-256;
+- geração do bytecode Python 3.13 e configuração Compose válida;
+- servidor pronto para ser iniciado em localhost, com o Docker Desktop como único pré-requisito de execução.
+
+O build do Docker requer que o Docker Desktop esteja iniciado e pode baixar a imagem base e o Flask na primeira execução.
