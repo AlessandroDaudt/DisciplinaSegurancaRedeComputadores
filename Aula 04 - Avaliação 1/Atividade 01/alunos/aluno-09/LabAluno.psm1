@@ -18,8 +18,20 @@ function Resolve-LabHttpsTarget {
         throw "O alvo precisa usar HTTPS."
     }
 
-    if (@("127.0.0.1", "localhost") -notcontains $uri.Host.ToLowerInvariant()) {
-        throw "Por segurança, o alvo precisa ser localhost ou 127.0.0.1."
+    $hostName = $uri.Host.ToLowerInvariant()
+    $isLocalTarget = @("127.0.0.1", "localhost") -contains $hostName
+    $isAllowedPrivateTarget = $false
+    $targetAddress = $null
+
+    if ([System.Net.IPAddress]::TryParse($uri.Host, [ref]$targetAddress) -and
+        $targetAddress.AddressFamily -eq [System.Net.Sockets.AddressFamily]::InterNetwork) {
+        $octets = $targetAddress.GetAddressBytes()
+        $isAllowedPrivateTarget = ($octets[0] -eq 10) -or
+            (($octets[0] -eq 192) -and ($octets[1] -eq 168))
+    }
+
+    if (-not ($isLocalTarget -or $isAllowedPrivateTarget)) {
+        throw "Por segurança, o alvo precisa ser localhost, 127.0.0.1, 10.0.0.0/8 ou 192.168.0.0/16."
     }
 
     if ($uri.Port -ne 8443) {

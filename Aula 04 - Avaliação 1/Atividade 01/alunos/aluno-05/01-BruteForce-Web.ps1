@@ -29,7 +29,7 @@ $title.Location = New-Object System.Drawing.Point(24, 18)
 $form.Controls.Add($title)
 
 $note = New-Object System.Windows.Forms.Label
-$note.Text = "Use somente https://127.0.0.1:8443 e o usuário obtido no Wireshark."
+$note.Text = "Use somente HTTPS local ou em 10/8 ou 192.168/16, sempre na porta 8443, e o usuário obtido no Wireshark."
 $note.AutoSize = $true
 $note.ForeColor = [System.Drawing.Color]::DarkRed
 $note.Location = New-Object System.Drawing.Point(26, 52)
@@ -105,7 +105,7 @@ $output.Anchor = [System.Windows.Forms.AnchorStyles]::Top -bor [System.Windows.F
 $form.Controls.Add($output)
 
 $footer = New-Object System.Windows.Forms.Label
-$footer.Text = "A ferramenta não aceita alvos fora do localhost e não envia dados para serviços externos."
+$footer.Text = "Alvos permitidos: localhost/127.0.0.1, 10/8 ou 192.168/16 na porta 8443; sem serviços externos."
 $footer.AutoSize = $true
 $footer.Location = New-Object System.Drawing.Point(26, 602)
 $footer.Anchor = [System.Windows.Forms.AnchorStyles]::Left -bor [System.Windows.Forms.AnchorStyles]::Bottom

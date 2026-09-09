@@ -1,6 +1,6 @@
 # Roteiro do aluno 07
 
-Este conjunto é individual. Trabalhe apenas com `https://127.0.0.1:8443` e com os arquivos desta pasta.
+Este conjunto é individual. Trabalhe apenas com `https://127.0.0.1:8443` ou com o endereço privado autorizado do professor em `10.0.0.0/8` ou `192.168.0.0/16`, sempre na porta 8443, e com os arquivos desta pasta.
 
 ## Objetivos
 
@@ -28,9 +28,9 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 & .\01-BruteForce-Web.ps1
 ```
 
-Informe o usuário obtido no Wireshark, mantenha o alvo `https://127.0.0.1:8443`, selecione `wordlist-web.txt` e inicie o teste.
+Informe o usuário obtido no Wireshark, use `https://127.0.0.1:8443` ou o endereço privado autorizado do professor, selecione `wordlist-web.txt` e inicie o teste.
 
-Abra a mesma URL no navegador, faça login com o resultado e baixe o ZIP. Aceite o aviso de certificado somente para `127.0.0.1`.
+Abra a mesma URL autorizada no navegador, faça login com o resultado e baixe o ZIP. Aceite o aviso de certificado somente para o endereço do laboratório.
 
 As listas desta atividade foram dimensionadas para que a descoberta de cada senha leve aproximadamente dez minutos no computador de referência. O tempo varia conforme o hardware e as versões instaladas; não encerre a ferramenta enquanto o teste estiver em andamento.
 
@@ -42,4 +42,4 @@ Execute `02-BruteForce-ZIP.ps1`, selecione o ZIP baixado e `wordlist-zip.txt`, e
 
 Execute `03-Hashes-Arquivos.ps1`, selecione a pasta extraída e gere os hashes. Compare os hashes normalizados e entregue os sete grupos de dois arquivos. Explique por que os hashes brutos podem ser diferentes quando há espaços ou quebras de linha invisíveis.
 
-Não tente acessar outras máquinas, sites ou contas. Esta atividade foi preparada para o serviço local da aula.
+Não tente acessar endereços fora das redes privadas autorizadas, sites ou contas. Esta atividade foi preparada para o serviço da aula.

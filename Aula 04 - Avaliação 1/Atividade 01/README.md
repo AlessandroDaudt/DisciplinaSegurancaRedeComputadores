@@ -16,8 +16,8 @@ O nome do usuário deve ser descoberto a partir da captura. O aluno não recebe 
 
 ## Escopo e regras de segurança
 
-- O alvo autorizado é exclusivamente `https://127.0.0.1:8443`.
-- A aplicação PowerShell bloqueia alvos que não sejam `localhost` ou `127.0.0.1`.
+- O alvo autorizado é `https://127.0.0.1:8443` ou um endereço IPv4 privado do laboratório em `10.0.0.0/8` ou `192.168.0.0/16`, sempre na porta `8443`.
+- A aplicação PowerShell bloqueia nomes de host e endereços fora de `localhost`, `127.0.0.1`, `10.0.0.0/8` e `192.168.0.0/16`.
 - Não use as ferramentas contra sites, redes, contas ou arquivos externos.
 - O brute force é limitado a listas locais preparadas para esta aula.
 - O arquivo ZIP contém somente textos didáticos sem dados pessoais.
@@ -80,6 +80,9 @@ O `LabAluno.psm1` é somente um módulo auxiliar importado pelos três aplicativ
 Na pasta da atividade, execute:
 
 ```powershell
+# Para uso somente na própria máquina, mantenha o padrão 127.0.0.1.
+# Para disponibilizar o laboratório em uma rede privada autorizada:
+$env:LAB_BIND_ADDRESS = "10.0.0.20" # ou um endereço 192.168.x.x do professor
 docker compose up -d --build
 docker compose ps
 ```
@@ -90,7 +93,13 @@ A aplicação estará em:
 https://127.0.0.1:8443
 ```
 
-Como o certificado é didático e autoassinado, o navegador exibirá um aviso. No laboratório local, prossiga para o endereço somente depois de confirmar que a URL é `127.0.0.1:8443`.
+Quando `LAB_BIND_ADDRESS` for configurado, use o endereço correspondente:
+
+```text
+https://10.0.0.20:8443
+```
+
+Como o certificado é didático e autoassinado, o navegador exibirá um aviso. Prossiga somente depois de confirmar que o endereço pertence ao laboratório e está em `127.0.0.1`, `10.0.0.0/8` ou `192.168.0.0/16`.
 
 Verificações do professor:
 
@@ -134,13 +143,13 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 Na interface:
 
-1. mantenha o alvo `https://127.0.0.1:8443`;
+1. informe `https://127.0.0.1:8443` ou `https://<endereço-privado-do-professor>:8443`;
 2. informe o usuário encontrado no Wireshark;
 3. selecione `wordlist-web.txt`;
 4. clique em **Iniciar teste**;
 5. registre a senha encontrada e a quantidade de tentativas.
 
-A ferramenta aceita o certificado autoassinado somente para o alvo local e envia somente requisições `POST /login`.
+A ferramenta aceita o certificado autoassinado somente para os alvos autorizados e envia somente requisições `POST /login`.
 
 ### Tempo esperado
 
@@ -148,7 +157,7 @@ As listas foram ampliadas para tornar a descoberta uma atividade de aproximadame
 
 ### 3. Fazer login e obter o ZIP
 
-Abra `https://127.0.0.1:8443` no navegador, aceite o aviso do certificado somente para `127.0.0.1`, faça login com o usuário e a senha encontrados e baixe o arquivo ZIP.
+Abra o endereço HTTPS autorizado no navegador, aceite o aviso do certificado somente para o endereço do laboratório, faça login com o usuário e a senha encontrados e baixe o arquivo ZIP.
 
 Salve o arquivo na sua pasta de trabalho. O servidor só disponibiliza o ZIP após um login válido.
 
