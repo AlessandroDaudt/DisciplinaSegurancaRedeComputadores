@@ -1,6 +1,6 @@
 # Aula 04 — Avaliação 1
 
-Laboratório individualizado para uma turma de 12 alunos. Cada pacote de aluno contém um PCAP próprio; a aplicação local possui 12 contas e associa cada conta a um material criptografado diferente.
+Esta pasta contém exclusivamente a Atividade 01: um laboratório individualizado para uma turma de 12 alunos. Cada pacote de aluno contém um PCAP próprio; a aplicação local possui 12 contas e associa cada conta a um material criptografado diferente.
 
 Para conhecer a estrutura, o fluxo e as validações, consulte [ANALISE_PACOTES.md](ANALISE_PACOTES.md).
 

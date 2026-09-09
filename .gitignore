@@ -26,5 +26,8 @@
 # Material exclusivo do professor da Atividade 01
 /Aula 04 - Avaliação 1/Atividade 01/professor/
 
+# Atividade 02 não faz parte do material publicado da Avaliação 1.
+/Aula 04 - Avaliação 1/Atividade 02/
+
 # O key log faz parte da captura didática distribuída aos alunos
 !/Aula 04 - Avaliação 1/Atividade 01/alunos/**/tls-keys.log

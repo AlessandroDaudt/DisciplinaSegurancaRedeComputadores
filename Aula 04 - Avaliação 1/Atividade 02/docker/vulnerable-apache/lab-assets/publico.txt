@@ -1,2 +1,0 @@
-Material público do laboratório.
-Este arquivo está no diretório mapeado pela rota /public/.
