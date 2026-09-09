@@ -124,11 +124,12 @@ function Invoke-HashAnalysis {
         $groupLabels = @{}
         foreach ($group in $groups) {
             $groupIndex++
-            $groupLabels[$group.Name] = "PAR-{0:D2}" -f $groupIndex
+            $groupLabels[$group.Name] = "PAR-$($groupIndex.ToString('D2'))"
         }
 
         foreach ($row in $rows) {
-            [void]$lines.Add("{0}`t{1}`t{2}`t{3}" -f $row.Name, $row.RawHash, $row.NormalizedHash, $groupLabels[$row.NormalizedHash])
+            $groupLabel = [string]$groupLabels[[string]$row.NormalizedHash]
+            [void]$lines.Add((@($row.Name, $row.RawHash, $row.NormalizedHash, $groupLabel) -join "`t"))
         }
 
         [void]$lines.Add("")
