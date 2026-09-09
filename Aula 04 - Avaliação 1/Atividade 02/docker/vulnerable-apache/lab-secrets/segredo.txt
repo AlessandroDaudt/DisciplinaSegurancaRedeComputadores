@@ -1,0 +1,2 @@
+LAB-ARQUIVO-CONTROLADO: leitura indevida confirmada.
+Este arquivo está fora do diretório público e existe apenas para a demonstração em localhost.

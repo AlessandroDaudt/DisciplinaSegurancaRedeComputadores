@@ -17,3 +17,14 @@
 
 # Cópia local duplicada do PDF de Tópico 1, mantida fora do conteúdo versionado
 /Aula 02/TISRC-TÓPICO1-CONTEÚDO.pdf
+
+# Materiais exclusivos do professor (não versionar respostas)
+**/GABARITO-PROFESSOR.md
+**/*-PROFESSOR.md
+**/*-professor.zip
+
+# Material exclusivo do professor da Atividade 01
+/Aula 04 - Avaliação 1/Atividade 01/professor/
+
+# O key log faz parte da captura didática distribuída aos alunos
+!/Aula 04 - Avaliação 1/Atividade 01/alunos/**/tls-keys.log
