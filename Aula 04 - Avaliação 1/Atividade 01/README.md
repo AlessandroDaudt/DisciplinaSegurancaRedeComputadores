@@ -189,13 +189,9 @@ Execute:
 
 Selecione a pasta extraída e clique em **Gerar hashes**.
 
-A tabela mostra:
+A tabela mostra somente o nome de cada arquivo e seu SHA-256 normalizado, calculado após normalizar espaços, tabs e quebras de linha.
 
-- SHA-256 bruto, que muda quando os bytes têm espaços ou quebras de linha diferentes;
-- SHA-256 normalizado, calculado após normalizar espaços, tabs e quebras de linha;
-- grupo do par identificado.
-
-O resultado esperado são **sete grupos com dois arquivos cada**. Os nomes dos arquivos são diferentes. Dentro de cada par, o texto visível é o mesmo, mas os bytes possuem pequenas diferenças invisíveis, como espaço no fim da linha ou quebra de linha final.
+Compare manualmente os hashes iguais para identificar os pares. A ferramenta não exibe rótulos, contagem de grupos ou resultado automático. Os nomes dos arquivos são diferentes. Dentro de cada par, o texto visível é o mesmo, mas os bytes possuem pequenas diferenças invisíveis, como espaço no fim da linha ou quebra de linha final.
 
 Os 14 arquivos foram organizados como sete textos-base diferentes, com duas variantes de cada texto. Assim, o agrupamento correto é feito pelo hash normalizado: cada variante de um mesmo texto forma um par, enquanto textos-base diferentes permanecem em grupos distintos.
 

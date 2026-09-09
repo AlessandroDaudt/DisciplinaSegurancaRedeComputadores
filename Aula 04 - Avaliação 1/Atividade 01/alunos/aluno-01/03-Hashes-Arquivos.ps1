@@ -12,21 +12,21 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 Import-Module (Join-Path $PSScriptRoot "LabAluno.psm1") -Force
 
 $form = New-Object System.Windows.Forms.Form
-$form.Text = "Identificador de pares por hash — Atividade 01"
+$form.Text = "Gerador de hashes — Atividade 01"
 $form.StartPosition = "CenterScreen"
 $form.Size = New-Object System.Drawing.Size(1120, 720)
 $form.MinimumSize = New-Object System.Drawing.Size(900, 600)
 $form.BackColor = [System.Drawing.Color]::WhiteSmoke
 
 $title = New-Object System.Windows.Forms.Label
-$title.Text = "Identificador de pares por hash"
+$title.Text = "Gerador de hashes"
 $title.Font = New-Object System.Drawing.Font("Segoe UI", 16, [System.Drawing.FontStyle]::Bold)
 $title.AutoSize = $true
 $title.Location = New-Object System.Drawing.Point(24, 18)
 $form.Controls.Add($title)
 
 $note = New-Object System.Windows.Forms.Label
-$note.Text = "O agrupamento didático usa o hash normalizado para ignorar espaços, tabs e quebras de linha."
+$note.Text = "Compare os hashes exibidos para identificar manualmente os arquivos equivalentes."
 $note.AutoSize = $true
 $note.Location = New-Object System.Drawing.Point(26, 52)
 $form.Controls.Add($note)
@@ -70,7 +70,7 @@ $output.Anchor = [System.Windows.Forms.AnchorStyles]::Top -bor [System.Windows.F
 $form.Controls.Add($output)
 
 $footer = New-Object System.Windows.Forms.Label
-$footer.Text = "Compare o hash bruto com o hash normalizado e registre os sete grupos de dois arquivos."
+$footer.Text = "Identifique manualmente os pares comparando os hashes iguais."
 $footer.AutoSize = $true
 $footer.Location = New-Object System.Drawing.Point(26, 642)
 $footer.Anchor = [System.Windows.Forms.AnchorStyles]::Left -bor [System.Windows.Forms.AnchorStyles]::Bottom
@@ -105,42 +105,18 @@ function Invoke-HashAnalysis {
             $normalized = Normalize-LabText -Text $text
             [pscustomobject]@{
                 Name = $file.Name
-                RawHash = Get-Sha256Hex -Bytes $bytes
-                NormalizedHash = Get-Sha256Hex -Bytes ([System.Text.Encoding]::UTF8.GetBytes($normalized))
+                Hash = Get-Sha256Hex -Bytes ([System.Text.Encoding]::UTF8.GetBytes($normalized))
             }
         }
 
-        $groups = @($rows | Group-Object NormalizedHash | Sort-Object Name)
-        $pairGroups = @($groups | Where-Object { $_.Count -eq 2 })
-        $invalidGroups = @($groups | Where-Object { $_.Count -ne 2 })
         $lines = New-Object System.Collections.Generic.List[string]
-        [void]$lines.Add("ARQUIVOS ANALISADOS: $($rows.Count)")
-        [void]$lines.Add("GRUPOS NORMALIZADOS: $($groups.Count)")
-        [void]$lines.Add("PARES COM DOIS ARQUIVOS: $($pairGroups.Count)")
-        [void]$lines.Add("")
-        [void]$lines.Add("NOME`tHASH BRUTO`tHASH NORMALIZADO`tGRUPO")
-
-        $groupIndex = 0
-        $groupLabels = @{}
-        foreach ($group in $groups) {
-            $groupIndex++
-            $groupLabels[$group.Name] = "PAR-$($groupIndex.ToString('D2'))"
-        }
+        [void]$lines.Add("NOME`tHASH")
 
         foreach ($row in $rows) {
-            $groupLabel = [string]$groupLabels[[string]$row.NormalizedHash]
-            [void]$lines.Add((@($row.Name, $row.RawHash, $row.NormalizedHash, $groupLabel) -join "`t"))
+            [void]$lines.Add((@($row.Name, $row.Hash) -join "`t"))
         }
 
-        [void]$lines.Add("")
-        if ($invalidGroups.Count -eq 0 -and $pairGroups.Count -eq 7) {
-            [void]$lines.Add("RESULTADO: exatamente 7 pares encontrados.")
-            $statusLabel.Text = "Análise concluída: 7 pares identificados."
-        }
-        else {
-            [void]$lines.Add("RESULTADO: confira a pasta; o esperado é 7 grupos com 2 arquivos.")
-            $statusLabel.Text = "Análise concluída com grupos fora do esperado."
-        }
+        $statusLabel.Text = "Hashes gerados; identifique manualmente os pares comparando hashes iguais."
 
         $output.Text = $lines -join "`r`n"
         $output.SelectionStart = 0
