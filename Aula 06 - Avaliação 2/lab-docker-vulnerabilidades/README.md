@@ -12,6 +12,8 @@ Ao iniciar o laboratório, os três alvos e o serviço do Metasploit sobem junto
 O Nmap e o verificador do MySQL permanecem disponíveis para execução sob
 demanda.
 
+Para seguir somente as tarefas da avaliação, use o [roteiro do aluno](roteiro.md).
+
 > **Uso restrito ao laboratório.** Os serviços ficam publicados somente em
 > `127.0.0.1` e os containers se comunicam pela rede privada do Compose. Não
 > altere os endereços para expor os alvos à rede da instituição ou à Internet.

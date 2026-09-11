@@ -13,6 +13,7 @@ Os exercícios práticos estão em [Aula 02 — Tópico 05](../Aula%2002/topico-
 ## Laboratório complementar
 
 - [Análise, exploração e correção de vulnerabilidades com Docker](lab-docker-vulnerabilidades/README.md)
+- [Roteiro do aluno](lab-docker-vulnerabilidades/roteiro.md)
 
 Ao executar `scripts/start.ps1` dentro da pasta do laboratório, os três alvos
 (Apache, MySQL e Linux/SSH) e o Metasploit são iniciados automaticamente na
