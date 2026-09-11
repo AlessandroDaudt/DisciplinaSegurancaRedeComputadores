@@ -44,8 +44,6 @@ services:
 
   exploiter:
     image: ${LAB_REGISTRY:-localhost:5000}/dsc/metasploit-framework:latest
-    profiles:
-      - tools
     networks:
       - labnet
     entrypoint: ["msfconsole"]

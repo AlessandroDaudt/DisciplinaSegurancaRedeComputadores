@@ -64,14 +64,14 @@ $images = @(
         Repository = 'dsc/scanner'
         Tag = 'nmap'
     }
-)
-
-if ($IncludeOptionalTools) {
-    $images += [pscustomobject]@{
+    [pscustomobject]@{
         Source = 'metasploitframework/metasploit-framework:latest'
         Repository = 'dsc/metasploit-framework'
         Tag = 'latest'
     }
+)
+
+if ($IncludeOptionalTools) {
     $images += [pscustomobject]@{
         Source = 'aquasec/trivy:0.74.0'
         Repository = 'dsc/trivy'

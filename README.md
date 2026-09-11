@@ -70,6 +70,10 @@ As atividades de PowerShell estão organizadas em [Aula 02](Aula%2002/) e [Aula 
 
 O [laboratório de análise, exploração e correção de vulnerabilidades](Aula%2006%20-%20Avalia%C3%A7%C3%A3o%202/lab-docker-vulnerabilidades/README.md) reúne três alvos antigos e isolados: um servidor Apache, um MySQL e um Linux com uma falha local de privilégio. A atividade usa Nmap, Trivy e Metasploit exclusivamente no ambiente local do laboratório.
 
+No início padrão, o script do laboratório sobe os três alvos e o Metasploit
+juntos. O Nmap e o verificador do MySQL são ferramentas auxiliares executadas
+somente quando o roteiro solicitar.
+
 ## Atividades práticas
 
 | Atividade | Tema | Arquivo |

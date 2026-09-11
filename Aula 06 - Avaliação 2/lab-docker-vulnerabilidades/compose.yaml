@@ -56,8 +56,6 @@ services:
 
   exploiter:
     image: metasploitframework/metasploit-framework:latest
-    profiles:
-      - tools
     networks:
       - labnet
     entrypoint: ["msfconsole"]

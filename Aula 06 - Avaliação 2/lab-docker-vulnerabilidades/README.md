@@ -8,6 +8,10 @@ Este laboratório está em Aula 06 - Avaliação 2/lab-docker-vulnerabilidades.
 Os comandos abaixo podem ser executados a partir da pasta do laboratório ou
 pelos scripts, que resolvem automaticamente a própria localização.
 
+Ao iniciar o laboratório, os três alvos e o serviço do Metasploit sobem juntos.
+O Nmap e o verificador do MySQL permanecem disponíveis para execução sob
+demanda.
+
 > **Uso restrito ao laboratório.** Os serviços ficam publicados somente em
 > `127.0.0.1` e os containers se comunicam pela rede privada do Compose. Não
 > altere os endereços para expor os alvos à rede da instituição ou à Internet.
@@ -31,8 +35,10 @@ pelos scripts, que resolvem automaticamente a própria localização.
 | `mysql` | banco de dados | `13306` | `3306/tcp` | protocolo MySQL |
 | `osroot` | Linux com SSH | `2222` | `22/tcp` | usuário `aluno`, senha `aluno` |
 
-Os nomes `apache`, `mysql` e `osroot` resolvem dentro da rede `labnet`. Os
-containers de ferramenta são opcionais e não contam como alvos do exercício.
+Os nomes `apache`, `mysql` e `osroot` resolvem dentro da rede `labnet`. O
+Metasploit é iniciado junto com os alvos; o scanner Nmap e o verificador do
+MySQL são ferramentas auxiliares executadas sob demanda e não contam como
+alvos do exercício.
 
 ### Topologia completa, incluindo as ferramentas
 
@@ -55,17 +61,18 @@ containers de ferramenta são opcionais e não contam como alvos do exercício.
 ```
 
 O **Metasploit** está definido no serviço Compose chamado `exploiter`. Ele não
-publica uma porta própria: é um container temporário conectado à mesma rede
-dos alvos e acessa o Apache usando `apache:80`. Para iniciá-lo:
+publica uma porta própria: é iniciado automaticamente com o laboratório, fica
+conectado à mesma rede dos alvos e acessa o Apache usando `apache:80`. Para
+abrir uma console interativa no serviço já iniciado:
 
 ```powershell
-docker compose --profile tools run --rm exploiter
+docker compose exec exploiter msfconsole -q
 ```
 
-O comando normal `docker compose up -d` inicia apenas os três alvos. O perfil
-`tools` é necessário para criar o Nmap, o verificador do MySQL ou o Metasploit.
-Dentro do container do Metasploit, não use `127.0.0.1:8081`; use o nome do
-serviço e a porta interna, por exemplo `RHOSTS apache` e `RPORT 80`.
+O comando normal `docker compose up -d` inicia os três alvos e o Metasploit. O
+perfil `tools` continua reservado ao Nmap e ao verificador do MySQL. Dentro do
+container do Metasploit, não use `127.0.0.1:8081`; use o nome do serviço e a
+porta interna, por exemplo `RHOSTS apache` e `RPORT 80`.
 
 ## Requisitos
 
@@ -103,12 +110,11 @@ Set-Location C:\projetos\DisciplinaSegurancaRedeComputadores\Aula 06 - Avaliaç�
 docker compose -f .\compose.registry.yaml up -d
 ~~~
 
-O script de publicação envia Apache, MySQL, Linux/Sudo e a imagem do scanner.
-Para espelhar também Metasploit e Trivy, faça o download explícito e use a
-opção adicional:
+O script de publicação envia Apache, MySQL, Linux/Sudo, a imagem do scanner e
+o Metasploit, pois ele faz parte da inicialização padrão do laboratório. Para
+espelhar também o Trivy, faça o download explícito e use a opção adicional:
 
 ~~~powershell
-docker pull metasploitframework/metasploit-framework:latest
 docker pull aquasec/trivy:0.74.0
 .\scripts\publish-local-registry.ps1 -IncludeOptionalTools
 ~~~
@@ -117,7 +123,7 @@ Depois, o Compose alternativo pode ser usado com:
 
 ~~~powershell
 docker compose -f .\compose.registry.yaml up -d
-docker compose -f .\compose.registry.yaml --profile tools run --rm exploiter
+docker compose -f .\compose.registry.yaml exec exploiter msfconsole -q
 ~~~
 
 Para outro computador da rede, localhost não aponta para o computador do
@@ -204,14 +210,16 @@ Cada grupo deve produzir uma ficha para cada alvo contendo:
 
 ### Alvo web
 
-Use o container opcional do Metasploit para pesquisar e testar o módulo
-relacionado ao Apache. A prova deve ser limitada a uma informação inofensiva,
-como a identidade do processo (`id`) ou a leitura controlada de um arquivo de
-teste. Não use payload persistente, reverse shell ou conexão externa.
+Use o serviço do Metasploit, iniciado junto com o laboratório, para pesquisar e
+testar o módulo relacionado ao Apache. Abra uma console interativa no serviço:
 
 ```powershell
-docker compose --profile tools run --rm exploiter
+docker compose exec exploiter msfconsole -q
 ```
+
+A prova deve ser limitada a uma informação inofensiva, como a identidade do
+processo (`id`) ou a leitura controlada de um arquivo de teste. Não use payload
+persistente, reverse shell ou conexão externa.
 
 ### Alvo de banco de dados
 
