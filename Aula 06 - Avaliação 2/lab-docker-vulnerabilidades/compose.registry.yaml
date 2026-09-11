@@ -44,9 +44,11 @@ services:
 
   exploiter:
     image: ${LAB_REGISTRY:-localhost:5000}/dsc/metasploit-framework:latest
+    environment:
+      PATH: "/usr/src/metasploit-framework:/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/src/tools/go/bin:/usr/src/tools/bin/go/bin"
     networks:
       - labnet
-    entrypoint: ["msfconsole"]
+    entrypoint: ["/usr/src/metasploit-framework/msfconsole"]
     command: ["-q"]
     stdin_open: true
     tty: true
