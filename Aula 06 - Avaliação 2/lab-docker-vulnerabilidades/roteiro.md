@@ -8,7 +8,28 @@
 - Não use reverse shell, persistência ou payload externo.
 - Registre evidências antes e depois da correção.
 
-## 1. Iniciar o laboratório
+## 1. Preparar o Windows
+
+Abra o PowerShell como administrador e instale os pré-requisitos:
+
+```powershell
+winget --version
+winget install --id Git.Git --exact --source winget --accept-source-agreements --accept-package-agreements
+winget install --id Docker.DockerDesktop --exact --source winget --accept-source-agreements --accept-package-agreements
+```
+
+Feche e abra novamente o PowerShell. Inicie o Docker Desktop, aguarde o mecanismo ficar pronto e confirme as versões:
+
+```powershell
+git --version
+docker --version
+docker compose version
+docker info
+```
+
+Se o `winget` informar que um pacote já está instalado, prossiga. O Docker Desktop pode solicitar a ativação do WSL 2, a virtualização na BIOS ou a reinicialização do Windows.
+
+## 2. Iniciar o laboratório
 
 No PowerShell:
 
@@ -24,7 +45,7 @@ A política de execução vale somente para esta janela do PowerShell.
 
 Confirme que estão ativos: `apache`, `mysql`, `osroot` e `exploiter`.
 
-## 2. Fazer a varredura inicial
+## 3. Fazer a varredura inicial
 
 ```powershell
 New-Item -ItemType Directory -Force .\resultado | Out-Null
@@ -40,7 +61,7 @@ Anote para cada alvo:
 - comportamento observado;
 - possível vulnerabilidade.
 
-## 3. Investigar o Apache
+## 4. Investigar o Apache
 
 1. Acesse `http://127.0.0.1:8081`.
 2. Pesquise o CVE indicado no resultado e confira a versão encontrada.
@@ -73,7 +94,7 @@ exit
 Use somente um módulo compatível com o alvo. Registre uma evidência mínima e
 inofensiva do resultado.
 
-## 4. Investigar o MySQL
+## 5. Investigar o MySQL
 
 Execute:
 
@@ -88,7 +109,7 @@ docker compose --profile tools run --rm mysql-check
 4. Consulte somente dados fictícios do laboratório.
 5. Não altere tabelas, senhas ou dados.
 
-## 5. Investigar o Linux/SSH
+## 6. Investigar o Linux/SSH
 
 Conecte-se ao alvo:
 
@@ -114,7 +135,7 @@ sudo -l
 4. Use `id` para registrar o resultado.
 5. Saia do SSH com `exit`.
 
-## 6. Corrigir os três alvos
+## 7. Corrigir os três alvos
 
 
 Abra os arquivos necessários para aplicar as correções:
@@ -147,7 +168,7 @@ docker compose ps
 Se você alterou a imagem do MySQL no Compose, confirme que a nova versão foi
 baixada antes de iniciar os serviços.
 
-## 7. Validar a correção
+## 8. Validar a correção
 
 ```powershell
 .\scripts\scan.ps1 | Tee-Object .\resultado\varredura-depois.txt
@@ -200,7 +221,7 @@ sudo -u#-1 id
 exit
 ```
 
-## 8. Entrega
+## 9. Entrega
 
 Entregue um relatório contendo:
 
@@ -211,7 +232,7 @@ Entregue um relatório contendo:
 5. evidência da validação após a correção;
 6. arquivos `varredura-antes.txt` e `varredura-depois.txt`.
 
-## 9. Encerrar o laboratório
+## 10. Encerrar o laboratório
 
 ```powershell
 docker compose down
