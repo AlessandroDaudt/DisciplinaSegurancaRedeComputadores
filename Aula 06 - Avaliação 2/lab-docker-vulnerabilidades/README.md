@@ -157,8 +157,10 @@ docker compose down
 
 ## Etapa 1 — descoberta e varredura
 
-O roteiro propositalmente não informa os identificadores das vulnerabilidades.
-Primeiro, os alunos devem levantar as versões e os serviços:
+O script apresenta as versões, confirma o comportamento do MySQL e exibe ao
+final uma seção com os identificadores CVE associados ao cenário. Use esses
+identificadores como ponto de partida para a pesquisa; o roteiro não entrega a
+explicação, o impacto ou a correção pronta.
 
 ```powershell
 .\scripts\scan.ps1
@@ -169,6 +171,8 @@ O script usa:
 - **Nmap** para descoberta e identificação de versão; o Compose também fornece
   um verificador controlado baseado no cliente MySQL para confirmar o alvo
   antigo sem depender de diferenças entre versões da NSE;
+- uma lista de CVEs para pesquisa, relacionada aos componentes vulneráveis do
+  laboratório;
 - **Trivy**, opcionalmente, para a análise de pacotes das imagens locais.
 
 Também é possível executar os comandos manualmente:
@@ -187,9 +191,9 @@ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.74.
 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.74.0 image --severity HIGH,CRITICAL dsc-lab/osroot-vulneravel:sudo-1.8.21
 ```
 
-O resultado do scanner é uma indicação inicial. No alvo Apache, a identificação
-da versão 2.4.49 deve ser comparada com o boletim do fornecedor antes de a
-equipe afirmar que a exploração foi confirmada.
+O resultado do scanner e a lista de CVEs são indicações iniciais. Compare as
+versões e os identificadores com fontes confiáveis antes de afirmar que uma
+exploração foi confirmada.
 
 Se o Trivy tiver sido espelhado no registry local, substitua a imagem do
 comando por localhost:5000/dsc/trivy:0.74.0.

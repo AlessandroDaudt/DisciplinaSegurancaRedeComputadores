@@ -36,13 +36,14 @@ Anote para cada alvo:
 - serviço e versão;
 - porta;
 - resultado do scanner;
+- CVE indicado na seção `CVEs para pesquisa`;
 - comportamento observado;
 - possível vulnerabilidade.
 
 ## 3. Investigar o Apache
 
 1. Acesse `http://127.0.0.1:8081`.
-2. Pesquise a vulnerabilidade usando a versão encontrada.
+2. Pesquise o CVE indicado no resultado e confira a versão encontrada.
 3. Registre a fonte consultada, o identificador e a correção indicada.
 4. Abra o Metasploit:
 
@@ -75,7 +76,7 @@ docker compose --profile tools run --rm scanner -Pn -sV -p 3306 mysql
 docker compose --profile tools run --rm mysql-check
 ```
 
-1. Relacione a versão e o comportamento observado com uma vulnerabilidade.
+1. Relacione o CVE indicado, a versão e o comportamento observado.
 2. Pesquise a referência e a versão corrigida.
 3. Registre a evidência do acesso indevido.
 4. Consulte somente dados fictícios do laboratório.
@@ -100,7 +101,7 @@ sudo --version
 sudo -l
 ```
 
-1. Pesquise a vulnerabilidade relacionada à versão e à configuração encontrada.
+1. Pesquise o CVE indicado e confira a versão e a configuração encontrada.
 2. Registre a referência e a correção indicada.
 3. Faça uma demonstração controlada somente dentro do container.
 4. Use `id` para registrar o resultado.
