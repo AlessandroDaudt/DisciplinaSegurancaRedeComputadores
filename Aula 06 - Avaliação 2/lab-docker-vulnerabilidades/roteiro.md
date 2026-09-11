@@ -14,9 +14,13 @@ No PowerShell:
 
 ```powershell
 Set-Location 'C:\projetos\DisciplinaSegurancaRedeComputadores\Aula 06 - Avaliação 2\lab-docker-vulnerabilidades'
+git pull
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
 .\scripts\start.ps1
 docker compose ps
 ```
+
+A política de execução vale somente para esta janela do PowerShell.
 
 Confirme que estão ativos: `apache`, `mysql`, `osroot` e `exploiter`.
 
