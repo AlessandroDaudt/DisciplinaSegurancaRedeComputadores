@@ -34,6 +34,10 @@ Se o `winget` informar que um pacote já está instalado, prossiga. O Docker Des
 No PowerShell:
 
 ```powershell
+New-Item -ItemType Directory -Path C:\projetos -Force
+Set-Location C:\projetos
+git clone https://github.com/AlessandroDaudt/DisciplinaSegurancaRedeComputadores.git
+Set-Location .\DisciplinaSegurancaRedeComputadores
 Set-Location 'C:\projetos\DisciplinaSegurancaRedeComputadores\Aula 06 - Avaliação 2\lab-docker-vulnerabilidades'
 git pull
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
