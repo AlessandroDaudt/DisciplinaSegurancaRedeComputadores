@@ -60,11 +60,15 @@ Não existe mais uma tela geral: cada atividade possui uma interface própria, c
 | [Aula 03](Aula%2003/) | Segurança Física: material em PDF e atividades práticas em PowerShell |
 | [Aula 04 - Avaliação 1](Aula%2004%20-%20Avalia%C3%A7%C3%A3o%201/) | Laboratório individualizado para uma turma de 12 alunos, com PCAPs, contas e materiais criptografados distintos |
 | [Aula 05](Aula%2005/) | Material em PDF do Tópico 4 — Autenticidade e responsabilização |
-| [Aula 06 - Avaliação 2](Aula%2006%20-%20Avalia%C3%A7%C3%A3o%202/) | Material em PDF do Tópico 5 — Ameaças, ataques e mini-SOC |
+| [Aula 06 - Avaliação 2](Aula%2006%20-%20Avalia%C3%A7%C3%A3o%202/) | Material em PDF do Tópico 5 e laboratório Docker de vulnerabilidades |
 | [Aula 07 - Avaliação 3](Aula%2007%20-%20Avalia%C3%A7%C3%A3o%203/) | Espaço reservado para a terceira avaliação |
 | [Aula 08 - Recuperação](Aula%2008%20-%20Recupera%C3%A7%C3%A3o/) | Espaço reservado para a recuperação |
 
 As atividades de PowerShell estão organizadas em [Aula 02](Aula%2002/) e [Aula 03](Aula%2003/). O PDF do Tópico 2 não estava presente na pasta recebida, mas as atividades de integridade e hash estão disponíveis.
+
+## Laboratório Docker
+
+O [laboratório de análise, exploração e correção de vulnerabilidades](Aula%2006%20-%20Avalia%C3%A7%C3%A3o%202/lab-docker-vulnerabilidades/README.md) reúne três alvos antigos e isolados: um servidor Apache, um MySQL e um Linux com uma falha local de privilégio. A atividade usa Nmap, Trivy e Metasploit exclusivamente no ambiente local do laboratório.
 
 ## Atividades práticas
 

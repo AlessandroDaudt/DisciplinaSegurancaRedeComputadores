@@ -1,0 +1,39 @@
+#!/bin/sh
+set -eu
+
+host="${1:-mysql}"
+port="${2:-3306}"
+user="${3:-root}"
+attempts="${4:-1000}"
+
+case "$attempts" in
+  ''|*[!0-9]*)
+    echo "Quantidade de tentativas invalida: $attempts" >&2
+    exit 2
+    ;;
+esac
+
+echo "Verificacao controlada de autenticacao em $host:$port para o usuario $user"
+echo "A senha enviada e deliberadamente incorreta; limite: $attempts tentativas"
+
+i=1
+while [ "$i" -le "$attempts" ]; do
+  if result="$(mysql \
+      --protocol=TCP \
+      --connect-timeout=1 \
+      --batch \
+      --skip-column-names \
+      --host="$host" \
+      --port="$port" \
+      --user="$user" \
+      --password='senha-incorreta-do-lab' \
+      --execute='SELECT VERSION();' 2>/dev/null)"; then
+    echo "Acesso aceito na tentativa $i"
+    echo "Versao retornada: $result"
+    exit 0
+  fi
+  i=$((i + 1))
+done
+
+echo "Nenhum acesso aceito nas $attempts tentativas."
+exit 1

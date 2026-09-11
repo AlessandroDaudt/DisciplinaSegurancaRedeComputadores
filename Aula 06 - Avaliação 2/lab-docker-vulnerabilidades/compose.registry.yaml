@@ -1,0 +1,57 @@
+name: dsc-lab-vulnerabilidades-registry
+
+services:
+  apache:
+    image: ${LAB_REGISTRY:-localhost:5000}/dsc/apache-vulneravel:2.4.49
+    ports:
+      - "127.0.0.1:8081:80"
+    networks:
+      - labnet
+    restart: "no"
+
+  mysql:
+    image: ${LAB_REGISTRY:-localhost:5000}/dsc/mysql:5.5.23
+    ports:
+      - "127.0.0.1:13306:3306"
+    networks:
+      - labnet
+    restart: "no"
+
+  osroot:
+    image: ${LAB_REGISTRY:-localhost:5000}/dsc/osroot-vulneravel:sudo-1.8.21
+    ports:
+      - "127.0.0.1:2222:22"
+    networks:
+      - labnet
+    restart: "no"
+
+  scanner:
+    image: ${LAB_REGISTRY:-localhost:5000}/dsc/scanner:nmap
+    profiles:
+      - tools
+    networks:
+      - labnet
+    entrypoint: ["nmap"]
+
+  mysql-check:
+    image: ${LAB_REGISTRY:-localhost:5000}/dsc/scanner:nmap
+    profiles:
+      - tools
+    networks:
+      - labnet
+    entrypoint: ["/usr/local/bin/mysql-auth-check"]
+    command: ["mysql", "3306", "root", "1000"]
+
+  exploiter:
+    image: ${LAB_REGISTRY:-localhost:5000}/dsc/metasploit-framework:latest
+    profiles:
+      - tools
+    networks:
+      - labnet
+    entrypoint: ["msfconsole"]
+    command: ["-q"]
+    stdin_open: true
+    tty: true
+
+networks:
+  labnet:

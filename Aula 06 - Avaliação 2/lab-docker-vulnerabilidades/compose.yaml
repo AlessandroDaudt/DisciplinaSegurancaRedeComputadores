@@ -1,0 +1,72 @@
+name: dsc-lab-vulnerabilidades
+
+services:
+  apache:
+    build:
+      context: ./targets/apache
+      dockerfile: Dockerfile
+    image: dsc-lab/apache-vulneravel:2.4.49
+    ports:
+      - "127.0.0.1:8081:80"
+    networks:
+      - labnet
+    restart: "no"
+
+  mysql:
+    image: vulhub/mysql:5.5.23
+    ports:
+      - "127.0.0.1:13306:3306"
+    networks:
+      - labnet
+    restart: "no"
+
+  osroot:
+    build:
+      context: ./targets/os-root
+      dockerfile: Dockerfile
+    image: dsc-lab/osroot-vulneravel:sudo-1.8.21
+    ports:
+      - "127.0.0.1:2222:22"
+    networks:
+      - labnet
+    restart: "no"
+
+  scanner:
+    build:
+      context: ./tools/scanner
+      dockerfile: Dockerfile
+    image: dsc-lab/scanner:nmap
+    profiles:
+      - tools
+    networks:
+      - labnet
+    entrypoint: ["nmap"]
+
+  mysql-check:
+    build:
+      context: ./tools/scanner
+      dockerfile: Dockerfile
+    image: dsc-lab/scanner:nmap
+    profiles:
+      - tools
+    networks:
+      - labnet
+    entrypoint: ["/usr/local/bin/mysql-auth-check"]
+    command: ["mysql", "3306", "root", "1000"]
+
+  exploiter:
+    image: metasploitframework/metasploit-framework:latest
+    profiles:
+      - tools
+    networks:
+      - labnet
+    entrypoint: ["msfconsole"]
+    command: ["-q"]
+    stdin_open: true
+    tty: true
+
+networks:
+  labnet:
+    # O binding em 127.0.0.1 limita o acesso ao host local. O modo
+    # internal=true impede a publicação de portas em algumas versões do
+    # Docker Desktop para Windows.

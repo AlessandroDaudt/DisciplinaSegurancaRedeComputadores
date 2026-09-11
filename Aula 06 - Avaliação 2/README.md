@@ -9,3 +9,7 @@ O PDF fornecido nesta pasta trata de ameaças, ataques, vulnerabilidades e triag
 ## Atividades relacionadas
 
 Os exercícios práticos estão em [Aula 02 — Tópico 05](../Aula%2002/topico-05-ameacas-ataques-e-mini-soc/README.md).
+
+## Laboratório complementar
+
+- [Análise, exploração e correção de vulnerabilidades com Docker](lab-docker-vulnerabilidades/README.md)
